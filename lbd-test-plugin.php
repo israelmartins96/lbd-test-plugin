@@ -46,20 +46,41 @@ defined( 'ABSPATH' ) || exit;
 
 class LBD_Test_Plugin {
 
-    public static function activate() {
+    /**
+    * LBD Test Plugin Constructor
+    */
+    public function __construct() {
 
-        // Generate custom post type (CPT)
-
-        // Fluch rewrite rules
+        $this->init_hooks();
 
     }
 
+    /**
+    * When the plugin is activated
+    */
+    public static function activate() {
+
+        // Register custom post type (CPT)
+        $this->register_custom_post_type();
+
+        // Fluch rewrite rules
+        flush_rewrite_rules();
+
+    }
+
+    /**
+    * When the plugin is deactivated
+    */
     public static function deactivate() {
 
         // Flush rewrite rules
+        flush_rewrite_rules();
 
     }
 
+    /**
+    * When the plugin is uninstalled
+    */
     public static function uninstall() {
 
         // Delete CPT
@@ -68,16 +89,40 @@ class LBD_Test_Plugin {
 
     }
 
+    /**
+    * Hook into actions and filters
+    */
+    private function init_hooks() {
+
+        // Register plugin activation hook
+        register_activation_hook( __FILE__, array( $this, 'activate' ) );
+
+        // Register plugin deactivation hook
+        register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
+
+        // Register plugin uninstallation hook
+
+        // Register post type
+        add_action( 'init', array( $this, 'register_custom_post_type' ) );
+
+    }
+
+    /**
+    * Registers custom post type
+    */
+    public function register_custom_post_type() {
+
+        $args = array(
+            'label'     => 'Books',
+            'public'    => true
+        );
+
+        register_post_type( 'book', $args );
+    }
+
 }
 
+// Initiate plugin
 if ( class_exists( 'LBD_Test_Plugin' ) ) {
     $lbd_test_plugin = new LBD_Test_Plugin();
 }
-
-// Activation
-register_activation_hook( __FILE__, array( $lbd_test_plugin, 'activate' ) );
-
-// Deactivation
-register_deactivation_hook( __FILE__, array( $lbd_test_plugin, 'deactivate' ) );
-
-// Uninstall
