@@ -41,3 +41,43 @@
 
  Copyright 2024 Lightbulb Devs
  */
+
+defined( 'ABSPATH' ) || exit;
+
+class LBD_Test_Plugin {
+
+    public static function activate() {
+
+        // Generate custom post type (CPT)
+
+        // Fluch rewrite rules
+
+    }
+
+    public static function deactivate() {
+
+        // Flush rewrite rules
+
+    }
+
+    public static function uninstall() {
+
+        // Delete CPT
+
+        // Delete plugin data from DB
+
+    }
+
+}
+
+if ( class_exists( 'LBD_Test_Plugin' ) ) {
+    $lbd_test_plugin = new LBD_Test_Plugin();
+}
+
+// Activation
+register_activation_hook( __FILE__, array( $lbd_test_plugin, 'activate' ) );
+
+// Deactivation
+register_deactivation_hook( __FILE__, array( $lbd_test_plugin, 'deactivate' ) );
+
+// Uninstall
