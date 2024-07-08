@@ -58,7 +58,7 @@ class LBD_Test_Plugin {
     /**
     * When the plugin is activated
     */
-    public static function activate() {
+    function activate() {
 
         // Register custom post type (CPT)
         $this->register_custom_post_type();
@@ -71,7 +71,7 @@ class LBD_Test_Plugin {
     /**
     * When the plugin is deactivated
     */
-    public static function deactivate() {
+    function deactivate() {
 
         // Flush rewrite rules
         flush_rewrite_rules();
@@ -81,7 +81,7 @@ class LBD_Test_Plugin {
     /**
     * When the plugin is uninstalled
     */
-    public static function uninstall() {
+    function uninstall() {
 
         // Delete CPT
 
@@ -92,15 +92,13 @@ class LBD_Test_Plugin {
     /**
     * Hook into actions and filters
     */
-    private function init_hooks() {
+    function init_hooks() {
 
         // Register plugin activation hook
         register_activation_hook( __FILE__, array( $this, 'activate' ) );
 
         // Register plugin deactivation hook
         register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
-
-        // Register plugin uninstallation hook
 
         // Register post type
         add_action( 'init', array( $this, 'register_custom_post_type' ) );
