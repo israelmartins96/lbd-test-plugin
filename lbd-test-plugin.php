@@ -79,17 +79,6 @@ class LBD_Test_Plugin {
     }
 
     /**
-    * When the plugin is uninstalled
-    */
-    function uninstall() {
-
-        // Delete CPT
-
-        // Delete plugin data from DB
-
-    }
-
-    /**
     * Hook into actions and filters
     */
     function init_hooks() {
