@@ -51,48 +51,38 @@ class LBD_Test_Plugin {
     * LBD Test Plugin Constructor
     */
     public function __construct() {
-
         $this->init_hooks();
-
+        $this->create_post_type();
     }
 
     /**
     * When the plugin is activated
     */
     function activate() {
-
         // Register custom post type (CPT)
         $this->register_custom_post_type();
 
         // Fluch rewrite rules
         flush_rewrite_rules();
-
     }
 
     /**
     * When the plugin is deactivated
     */
     function deactivate() {
-
         // Flush rewrite rules
         flush_rewrite_rules();
-
     }
 
     /**
     * Hook into actions and filters
     */
-    function init_hooks() {
-
+    protected function init_hooks() {
         // Register plugin activation hook
         register_activation_hook( __FILE__, array( $this, 'activate' ) );
 
         // Register plugin deactivation hook
         register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
-
-        // Register post type
-        add_action( 'init', array( $this, 'register_custom_post_type' ) );
-
     }
 
     /**
@@ -103,10 +93,17 @@ class LBD_Test_Plugin {
     }
 
     /**
+     * Create post type.
+    */
+    protected function create_post_type() {
+        // Register post type
+        add_action( 'init', array( $this, 'register_custom_post_type' ) );
+    }
+
+    /**
     * Registers custom post type
     */
     public function register_custom_post_type() {
-
         $args = array(
             'label'     => 'Books',
             'public'    => true
