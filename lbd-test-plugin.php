@@ -1,4 +1,5 @@
 <?php
+
 /**
  * LbD Test Plugin
  *
@@ -95,6 +96,13 @@ class LBD_Test_Plugin {
     }
 
     /**
+     * Enqueue scripts
+    */
+    function register_admin_scripts() {
+        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+    }
+
+    /**
     * Registers custom post type
     */
     public function register_custom_post_type() {
@@ -107,9 +115,21 @@ class LBD_Test_Plugin {
         register_post_type( 'book', $args );
     }
 
+    /**
+     * Enqueues all plugin stylesheets and scripts
+    */
+    // Admin
+    function enqueue_admin_scripts() {
+        wp_enqueue_style( 'lbd-admin-style', plugins_url( '/assets/admin/css/style.css', __FILE__ ) );
+        wp_enqueue_script( 'lbd-admin-script', plugins_url( '/assets/admin/js/script.js', __FILE__ ) );
+    }
+
 }
 
-// Initiate plugin
+/**
+ * Initiate plugin
+*/
 if ( class_exists( 'LBD_Test_Plugin' ) ) {
     $lbd_test_plugin = new LBD_Test_Plugin();
+    $lbd_test_plugin->register_admin_scripts();
 }

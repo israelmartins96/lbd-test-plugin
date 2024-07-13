@@ -1,7 +1,6 @@
 <?php
 
 /**
- * 
  * Trigger this file on plugin uninstall
  * 
  * @since       0.1.0
