@@ -51,6 +51,7 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 
 use Includes\Activate;
 use Includes\Deactivate;
+use Includes\Admin\Admin_Pages;
 
 if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
     class LBD_Test_Plugin {
