@@ -85,10 +85,11 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
         }
 
         /**
-         * Enqueue scripts
+         * Initialises admin sections
         */
-        function register_admin_scripts() {
+        function admin_init() {
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+            add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
         }
 
         /**
@@ -100,13 +101,29 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
             wp_enqueue_script( 'lbd-admin-script', plugins_url( '/assets/admin/js/script.js', __FILE__ ) );
         }
 
+        /**
+         * Adds admin pages
+        */
+        function add_admin_pages() {
+            $menu_icon_src = file_get_contents( plugin_dir_path( __FILE__ ) . 'assets/admin/icons/lbd-icon.svg' );
+
+            $menu_icon = 'data:image/svg+xml;base64,' . base64_encode( $menu_icon_src );
+            
+            add_menu_page( 'LBD Plugin', 'LBD', 'manage_options', 'lbd-plugin', array( $this, 'admin_index' ), $menu_icon, 110 );
+        }
+
+        /**
+         * Admin index page
+        */
+        public function admin_index() {}
+
     }
 
     /**
      * Initialise plugin
     */
     $lbd_test_plugin = new LBD_Test_Plugin();
-    $lbd_test_plugin->register_admin_scripts();
+    $lbd_test_plugin->admin_init();
 
     // Register plugin activation hook
     register_activation_hook( __FILE__, array( $lbd_test_plugin, 'activate' ) );
