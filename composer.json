@@ -1,0 +1,17 @@
+{
+    "name": "lbd-test-plugin/lbd-test-plugin",
+    "description": "Test/Example plugin.",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Israel Martins",
+            "email": "m.oisrael96@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"includes\\": "./includes"}
+    }
+}
