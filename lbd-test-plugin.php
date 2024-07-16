@@ -49,6 +49,19 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
     class LBD_Test_Plugin {
 
         /**
+         * Plugin name
+        */
+        public $plugin;
+        
+        /**
+         * Constructor
+        */
+        function __construct() {
+            // Set plugin name
+            $this->plugin = plugin_basename( __FILE__ );
+        }
+        
+        /**
          * On plugin activation
         */
         function activate() {
@@ -91,6 +104,18 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
             // Actions
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
             add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
+
+            // Filters
+            add_filter( "plugin_action_links_$this->plugin", array( $this, 'add_settings_link' ) );
+        }
+
+        /**
+         * Custom settings link on All Plugins page
+        */
+        public function add_settings_link( $links ) {
+            $settings_link = '<a href="admin.php?page=lbd-plugin">Settings</a>';
+            array_push( $links, $settings_link );
+            return $links;
         }
 
         /**
@@ -110,13 +135,13 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
 
             $menu_icon = 'data:image/svg+xml;base64,' . base64_encode( $menu_icon_src );
             
-            add_menu_page( 'LBD Plugin', 'LBD', 'manage_options', 'lbd-plugin', array( $this, 'admin_index' ), $menu_icon, 110 );
+            add_menu_page( 'LBD Plugin', 'LBD', 'manage_options', 'lbd-plugin', array( $this, 'add_admin_index' ), $menu_icon, 110 );
         }
 
         /**
          * Admin index page
         */
-        public function admin_index() {
+        public function add_admin_index() {
             require_once plugin_dir_path( __FILE__ ) . 'templates/admin/admin.php';
         }
 
