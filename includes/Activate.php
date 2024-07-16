@@ -9,6 +9,7 @@
  * @subpackage          LBD_Test_Plugin/Classes
  * @version             0.1.0
  */
+namespace Includes;
 
 /**
  * Fired during plugin activation.
@@ -20,7 +21,7 @@
  * @subpackage          LBD_Test_Plugin/Classes
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
-class LBD_Plugin_Activator {
+class Activate {
     
     /**
      * Ensures that WordPress rewrite rules are refreshed when the plugin is activated.

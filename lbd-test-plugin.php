@@ -45,6 +45,13 @@ Copyright 2024 Lightbulb Devs
 
 defined( 'ABSPATH' ) || exit;
 
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Includes\Activate;
+use Includes\Deactivate;
+
 if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
     class LBD_Test_Plugin {
 
@@ -65,16 +72,14 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
          * On plugin activation
         */
         function activate() {
-            require_once plugin_dir_path( __FILE__ ) . 'includes/class-lbd-plugin-activator.php';
-            LBD_Plugin_Activator::activate();
+            Activate::activate();
         }
 
         /**
          * On plugin deactivation
         */
         function deactivate() {
-            require_once plugin_dir_path( __FILE__ ) . 'includes/class-lbd-plugin-deactivator.php';
-            LBD_Plugin_Deactivator::deactivate();
+            Deactivate::deactivate();
         }
 
         /**
