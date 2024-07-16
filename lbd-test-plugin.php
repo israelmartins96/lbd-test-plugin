@@ -88,6 +88,7 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
          * Initialises admin sections
         */
         function admin_init() {
+            // Actions
             add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
             add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
         }
@@ -115,7 +116,9 @@ if ( ! class_exists( 'LBD_Test_Plugin' ) ) {
         /**
          * Admin index page
         */
-        public function admin_index() {}
+        public function admin_index() {
+            require_once plugin_dir_path( __FILE__ ) . 'templates/admin/admin.php';
+        }
 
     }
 
