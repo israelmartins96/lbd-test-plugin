@@ -3,7 +3,7 @@
 /**
  * Enqueues plugin scripts.
  * 
- * @since               0.1.0
+ * @since               0.2.0
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
@@ -16,7 +16,7 @@ namespace Includes\Base;
  * 
  * This class enqueues all scripts required by the plugin.
  * 
- * @since               0.1.0
+ * @since               0.2.0
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
  * @author              Israel Martins <m.oisrael96@gmail.com>
