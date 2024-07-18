@@ -9,7 +9,7 @@
  * @subpackage          LBD_Test_Plugin/Classes
  * @version             0.1.0
  */
-namespace Includes;
+namespace Includes\Base;
 
 /**
  * Fired during plugin deactivation.
