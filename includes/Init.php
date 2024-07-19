@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Fired during plugin activation
+ * Initialises plugin classes as services.
  * 
  * @since               0.2.0
  *
@@ -12,9 +12,9 @@
 namespace Includes;
 
 /**
- * Fired during plugin activation.
+ * Initialises plugin classes as services.
  * 
- * This class defines all code necessary to run during the plugin's activation.
+ * This class initialises the plugin classes as services to enable all functionalities of the plugin.
  * 
  * @since               0.2.0
  * @package             LBD_Test_Plugin
@@ -32,7 +32,8 @@ final class Init {
     public static function get_services() {
         $services = array(
             Pages\Admin::class,
-            Base\Enqueue::class
+            Base\Enqueue::class,
+            Base\Action_Links::class
         );
         
         return $services;

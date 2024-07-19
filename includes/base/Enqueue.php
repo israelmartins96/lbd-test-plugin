@@ -23,12 +23,15 @@ namespace Includes\Base;
  */
 class Enqueue {
 
+    /**
+     * Enqueues the plugin's admin stylesheets and scripts
+     */
     public function register() {
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
     }
 
     /**
-     * Enqueues all plugin stylesheets and scripts
+     * Prepares all the plugin's admin stylesheets and scripts for enqueuing
     */
     // Admin
     public function enqueue_admin_scripts() {
