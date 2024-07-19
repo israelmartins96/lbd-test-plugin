@@ -7,10 +7,11 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes\Base;
 
+use \Includes\Base\Controller;
 /**
  * Updates plugin action links.
  * 
@@ -21,24 +22,7 @@ namespace Includes\Base;
  * @subpackage          LBD_Test_Plugin/Classes
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
-class Action_Links {
-
-    /**
-     * plugin name
-     *
-     * @var string to store the plugin name.
-     */
-    protected $plugin;
-
-    /**
-     * Constructor
-     */
-    public function __construct() {
-        /**
-         * Stores the plugin name from the PLUGIN constant.
-         */
-        $this->plugin = PLUGIN;
-    }
+class Action_Links extends Controller {
     
     /**
      * Customises the plugin action link(s) on All Plugins page.

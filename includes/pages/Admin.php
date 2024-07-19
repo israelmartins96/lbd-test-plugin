@@ -7,10 +7,11 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes\Pages;
 
+use \Includes\Base\Controller;
 /**
  * Admin Pages class.
  * 
@@ -21,7 +22,7 @@ namespace Includes\Pages;
  * @subpackage          LBD_Test_Plugin/Classes
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
-class Admin {
+class Admin extends Controller {
 
     /**
      * Adds admin page
@@ -38,7 +39,7 @@ class Admin {
      * @since       0.2.0
     */
     public function add_admin_pages() {
-        $menu_icon_src = file_get_contents( PLUGIN_PATH . 'assets/admin/icons/lbd-icon.svg' );
+        $menu_icon_src = file_get_contents( $this->plugin_path . 'assets/admin/icons/lbd-icon.svg' );
 
         $menu_icon = 'data:image/svg+xml;base64,' . base64_encode( $menu_icon_src );
         
@@ -51,7 +52,7 @@ class Admin {
      * @since       0.2.0
     */
     public function add_admin_index() {
-        require_once PLUGIN_PATH . 'templates/admin/admin.php';
+        require_once $this->plugin_path . 'templates/admin/admin.php';
     }
     
 }

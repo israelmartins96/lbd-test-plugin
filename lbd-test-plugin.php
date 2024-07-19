@@ -12,7 +12,7 @@
  * Plugin Name:         LBD Test Plugin
  * Plugin URI:          https://israelmartins.com
  * Description:         A test plugin.
- * Version:             0.2.1
+ * Version:             0.2.2
  * Requires at least:   5.2
  * Requires PHP:        7.2
  * Author:              Israel Martins
@@ -24,9 +24,6 @@
  * Text Domain:         lbd-test-plugin
  * Domain Path:         /languages/
  */
-
-use Includes\Base\Activate;
-use Includes\Base\Deactivate;
 
 /*
 This program is free software; you can redistribute it and/or
@@ -59,44 +56,23 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 }
 
 /**
- * Plugin root path Constant
- * 
- * @since   0.2.0
- */
-define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-
-/**
- * Plugin URL Constant
- * 
- * @since   0.2.0
- */
-define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-
-/**
- * Plugin name Constant
- * 
- * @since   0.2.1
- */
-define( 'PLUGIN', plugin_basename( __FILE__ ) );
-
-/**
  * To run during plugin activation.
  */
 function lbd_plugin_activate() {
-    Activate::activate();
-}
-
-/**
- * To run during plugin deactivation.
- */
-function lbd_plugin_deactivate() {
-    Deactivate::deactivate();
+    Includes\Base\Activate::activate();
 }
 
 /**
  * Register activation hook.
  */
 register_activation_hook( __FILE__, 'lbd_plugin_activate');
+
+/**
+ * To run during plugin deactivation.
+ */
+function lbd_plugin_deactivate() {
+    Includes\Base\Deactivate::deactivate();
+}
 
 /**
  * Register deactivation hook.
