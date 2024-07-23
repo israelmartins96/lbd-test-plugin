@@ -12,6 +12,8 @@
 namespace Includes\Pages;
 
 use \Includes\Base\Controller;
+use \Includes\API\Settings_API;
+
 /**
  * Admin Pages class.
  * 
@@ -25,12 +27,49 @@ use \Includes\Base\Controller;
 class Admin extends Controller {
 
     /**
-     * Adds admin page
-     * 
-     * @since       0.2.0
-    */
-    public function register() {
-        add_action( 'admin_menu', array( $this, 'add_admin_pages' ) );
+     * To store an instance of the Settings_API
+     *
+     * @var object
+     */
+    public $settings;
+
+    /**
+     * To store the array of pages.
+     *
+     * @var array
+     */
+    public $pages = array();
+
+    /**
+     * Gets the plugin menu icon
+     *
+     * @return string menu icon source
+     */
+    public function get_menu_icon() {
+        $menu_icon_src = file_get_contents( PLUGIN_PATH . 'assets/admin/icons/lbd-icon.svg' );
+
+        $menu_icon = 'data:image/svg+xml;base64,' . base64_encode( $menu_icon_src );
+
+        return $menu_icon;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->settings = new Settings_API();
+
+        $this->pages = array(
+            array(
+                'page_title'    => 'LBD Plugin',
+                'menu_title'    => 'LBD',
+                'capability'    => 'manage_options',
+                'menu_slug'     => 'lbd-plugin',
+                'callback'      => array( $this, 'add_admin_index' ),
+                'icon_url'      => '' . $this->get_menu_icon() . '',
+                'position'      => 110
+            )
+        );
     }
 
     /**
@@ -38,12 +77,8 @@ class Admin extends Controller {
      * 
      * @since       0.2.0
     */
-    public function add_admin_pages() {
-        $menu_icon_src = file_get_contents( $this->plugin_path . 'assets/admin/icons/lbd-icon.svg' );
-
-        $menu_icon = 'data:image/svg+xml;base64,' . base64_encode( $menu_icon_src );
-        
-        add_menu_page( 'LBD Plugin', 'LBD', 'manage_options', 'lbd-plugin', array( $this, 'add_admin_index' ), $menu_icon, 110 );
+    public function register() {
+        $this->settings->add_pages( $this->pages )->register();
     }
 
     /**
@@ -52,7 +87,7 @@ class Admin extends Controller {
      * @since       0.2.0
     */
     public function add_admin_index() {
-        require_once $this->plugin_path . 'templates/admin/admin.php';
+        echo '<h1>LBD Plugin</h1>';
     }
     
 }

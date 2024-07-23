@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes\Base;
 
@@ -45,19 +45,14 @@ class Controller {
     public $plugin_url;
 
     /**
-     * Plugin base file name
-     *
-     * @var string
-     */
-    private $plugin_filename = '/lbd-test-plugin.php';
-
-    /**
-     * Class constructor
+     * Class constructor. Store plugin constants as variables.
      */
     public function __construct() {
-        $this->plugin = plugin_basename( dirname( __FILE__, 3 ) ) . $this->plugin_filename;
-        $this->plugin_path = plugin_dir_path( dirname( __FILE__, 2 ) );
-        $this->plugin_url = plugin_dir_url( dirname( __FILE__, 2 ) );
+        $this->plugin = PLUGIN;
+
+        $this->plugin_path = PLUGIN_PATH;
+        
+        $this->plugin_url = PLUGIN_URL;
     }
     
 }
