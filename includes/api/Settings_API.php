@@ -97,8 +97,6 @@ class Settings_API {
      * @return void
      */
     public function add_subpages( array $pages ) {
-        $subpages_count = count( $this->admin_subpages );
-        
         $this->admin_subpages = array_merge( $this->admin_subpages, $pages );
 
         return $this;
