@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.1.2
  */
 namespace Includes\API;
 
@@ -100,16 +100,6 @@ class Settings_API {
         $subpages_count = count( $this->admin_subpages );
         
         $this->admin_subpages = array_merge( $this->admin_subpages, $pages );
-
-        for ( $i = 0; $i < $subpages_count; $i++ ) {
-            $position = $i + 1;
-
-            ?><pre><?php // print_r( $this->admin_subpages[ $i ]['position'] );?></pre><?php
-            
-            // array_merge( $pages[ $i ], array( 'position' => $position ) );
-        }
-
-        ?><pre><?php // print_r( $this->admin_subpages );?></pre><?php
 
         return $this;
     }
