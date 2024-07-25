@@ -12,6 +12,7 @@
 namespace Includes\Base;
 
 use \Includes\Base\Controller;
+
 /**
  * Updates plugin action links.
  * 

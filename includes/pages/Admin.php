@@ -7,12 +7,13 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.2
+ * @version             0.1.3
  */
 namespace Includes\Pages;
 
 use \Includes\Base\Controller;
 use \Includes\API\Settings_API;
+use \Includes\API\Callbacks\Admin_Callbacks;
 
 /**
  * Admin Pages class.
@@ -27,11 +28,18 @@ use \Includes\API\Settings_API;
 class Admin extends Controller {
 
     /**
-     * To store an instance of the Settings_API
+     * To store an instance of the Settings_API.
      *
      * @var object
      */
     public $settings;
+
+    /**
+     * To store an instance of the Admin_Callbacks.
+     *
+     * @var object
+     */
+    public $callbacks;
 
     /**
      * To store the array of pages.
@@ -41,19 +49,19 @@ class Admin extends Controller {
     public $pages = array();
 
     /**
-     * To store the array of sub-pages of the plugin admin dashboard
+     * To store the array of sub-pages of the plugin admin dashboard.
      *
      * @var array
      */
     public $subpages = array();
 
     /**
-     * Gets the plugin menu icon
+     * Gets the plugin menu icon.
      *
-     * @return string menu icon source
+     * @return string $menu_icon menu icon source
      */
     public function get_menu_icon() {
-        $menu_icon_src = file_get_contents( PLUGIN_PATH . 'assets/admin/icons/lbd-icon.svg' );
+        $menu_icon_src = file_get_contents( $this->plugin_path . 'assets/admin/icons/lbd-icon.svg' );
 
         $menu_icon = 'data:image/svg+xml;base64,' . base64_encode( $menu_icon_src );
 
@@ -61,59 +69,52 @@ class Admin extends Controller {
     }
 
     /**
-     * Constructor
-     */
-    public function __construct() {
+     * Adds admin pages.
+     * 
+     * @since       0.2.0
+    */
+    public function register() {
         // Instance of the plugin's Settings_API class.
         $this->settings = new Settings_API();
 
-        // Update the plugin's admin main page.
+        // Instance of the plugin's Admin_Callbacks class.
+        $this->callbacks = new Admin_Callbacks();
+
+        // Popuplate the plugin's main admin page array.
+        $this->set_pages();
+
+        // Popuplate the plugin's admin sub-pages array.
+        $this->set_subpages();
+        
+        // Adds the plugin admin pages and sub-pages
+        $this->settings->add_pages( $this->pages )->with_subpage( 'Dashboard' )->add_subpages( $this->subpages )->register();
+    }
+
+    /**
+     * Popuplates the plugin's main admin page array.
+     *
+     * @return void
+     */
+    public function set_pages() {
         $this->pages = array(
             array(
                 'page_title'    => 'LBD Plugin',
                 'menu_title'    => 'LBD',
                 'capability'    => 'manage_options',
                 'menu_slug'     => 'lbd-plugin',
-                'callback'      => array( $this, 'add_admin_index' ),
+                'callback'      => array( $this->callbacks, 'lbd_dashboard' ),
                 'icon_url'      => '' . $this->get_menu_icon() . '',
                 'position'      => 110
             )
         );
+    }
 
-        // Update the plugin's admin sub-pages.
-        $this->subpages = array(
-            array(
-                'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Post Types',
-                'menu_title'    => 'Custom Post Types',
-                'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-custom-post-types',
-                'callback'      => function() { echo '<h1>Custom Post Types Manager</h1>'; },
-                'position'      => 0
-            ),
-            array(
-                'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Taxonomies',
-                'menu_title'    => 'Taxonomies',
-                'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-taxonomies',
-                'callback'      => function() { echo '<h1>Taxonomies Manager</h1>'; },
-                'position'      => 0
-            ),
-            array(
-                'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Widgets',
-                'menu_title'    => 'Widgets',
-                'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-widgets',
-                'callback'      => function() { echo '<h1>Widgets Manager</h1>'; },
-                'position'      => 0
-            )
-        );
-        
-        /**
-         * Updates the menu position of the plugin's admin sub-pages.
-         */
+    /**
+     * Updates the menu positions of the plugin's admin sub-pages.
+     *
+     * @return void
+     */
+    public function set_subpages_positions() {
         // The number of sub-pages.
         $subpages_count = count( $this->subpages );
 
@@ -134,21 +135,43 @@ class Admin extends Controller {
     }
 
     /**
-     * Adds admin pages
-     * 
-     * @since       0.2.0
-    */
-    public function register() {
-        $this->settings->add_pages( $this->pages )->with_subpage( 'Dashboard' )->add_subpages( $this->subpages )->register();
-    }
+     * Popuplates the plugin's admin sub-pages array.
+     *
+     * @return void
+     */
+    public function set_subpages() {
+        $this->subpages = array(
+            array(
+                'parent_slug'   => 'lbd-plugin',
+                'page_title'    => 'Custom Post Types',
+                'menu_title'    => 'Custom Post Types',
+                'capability'    => 'manage_options',
+                'menu_slug'     => 'lbd-custom-post-types',
+                'callback'      => array( $this->callbacks, 'custom_post_types_dashboard' ),
+                'position'      => 0
+            ),
+            array(
+                'parent_slug'   => 'lbd-plugin',
+                'page_title'    => 'Custom Taxonomies',
+                'menu_title'    => 'Taxonomies',
+                'capability'    => 'manage_options',
+                'menu_slug'     => 'lbd-taxonomies',
+                'callback'      => array( $this->callbacks, 'taxonomies_dashboard' ),
+                'position'      => 0
+            ),
+            array(
+                'parent_slug'   => 'lbd-plugin',
+                'page_title'    => 'Custom Widgets',
+                'menu_title'    => 'Widgets',
+                'capability'    => 'manage_options',
+                'menu_slug'     => 'lbd-widgets',
+                'callback'      => array( $this->callbacks, 'widgets_dashboard' ),
+                'position'      => 0
+            )
+        );
 
-    /**
-     * Admin index page
-     * 
-     * @since       0.2.0
-    */
-    public function add_admin_index() {
-        echo '<h1>LBD Plugin</h1>';
+        // Sequentially update the menu positions of the plugin's admin sub-pages.
+        $this->set_subpages_positions();
     }
     
 }

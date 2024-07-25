@@ -118,5 +118,7 @@ class Settings_API {
             add_submenu_page( $subpage['parent_slug'], $subpage['page_title'], $subpage['menu_title'], $subpage['capability'], $subpage['menu_slug'], $subpage['callback'], $subpage['position'] );
         }
     }
+
+    public function register_custom_fields() {}
     
 }

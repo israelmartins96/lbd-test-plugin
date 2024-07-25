@@ -29,6 +29,13 @@ class Controller {
      * @var string
      */
     public $plugin;
+
+    /**
+     * Prepared to store current plugin version.
+     *
+     * @var string
+     */
+    public $plugin_version;
     
     /**
      * Prepared to store the plugin's base path.
@@ -49,6 +56,8 @@ class Controller {
      */
     public function __construct() {
         $this->plugin = PLUGIN;
+
+        $this->plugin_version = LBD_VERSION;
 
         $this->plugin_path = PLUGIN_PATH;
         

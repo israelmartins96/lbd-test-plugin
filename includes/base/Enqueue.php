@@ -12,6 +12,7 @@
 namespace Includes\Base;
 
 use \Includes\Base\Controller;
+
 /**
  * Enqueues plugin scripts.
  * 

@@ -12,7 +12,7 @@
  * Plugin Name:         LBD Test Plugin
  * Plugin URI:          https://israelmartins.com
  * Description:         A test plugin.
- * Version:             0.2.4
+ * Version:             0.2.5
  * Requires at least:   5.2
  * Requires PHP:        7.2
  * Author:              Israel Martins
@@ -47,6 +47,11 @@ Copyright 2024 Lightbulb Devs
  * Abort if this file is accessed directly
  */
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * Currently plugin version.
+ */
+define( 'LBD_VERSION', '0.2.5' );
 
 /**
  * Plugin name Constant
