@@ -32,7 +32,7 @@ class Admin extends Controller {
      *
      * @var object
      */
-    public $settings;
+    public $settings_API;
 
     /**
      * To store an instance of the Admin_Callbacks.
@@ -75,7 +75,7 @@ class Admin extends Controller {
     */
     public function register() {
         // Instance of the plugin's Settings_API class.
-        $this->settings = new Settings_API();
+        $this->settings_API = new Settings_API();
 
         // Instance of the plugin's Admin_Callbacks class.
         $this->callbacks = new Admin_Callbacks();
@@ -86,8 +86,14 @@ class Admin extends Controller {
         // Popuplate the plugin's admin sub-pages array.
         $this->set_subpages();
         
+        $this->set_settings();
+
+        $this->set_settings_sections();
+
+        $this->set_settings_fields();
+        
         // Adds the plugin admin pages and sub-pages
-        $this->settings->add_pages( $this->pages )->with_subpage( 'Dashboard' )->add_subpages( $this->subpages )->register();
+        $this->settings_API->add_pages( $this->pages )->with_subpage( 'Dashboard' )->add_subpages( $this->subpages )->register();
     }
 
     /**
@@ -172,6 +178,64 @@ class Admin extends Controller {
 
         // Sequentially update the menu positions of the plugin's admin sub-pages.
         $this->set_subpages_positions();
+    }
+
+    public function set_settings() {
+        $args = array(
+            array(
+                'option_group'  => 'lbd_options_group',
+                'option_name'   => 'text-example',
+                'callback'      => array( $this->callbacks, 'lbd_options_group' )
+            ),
+            array(
+                'option_group'  => 'lbd_options_group',
+                'option_name'   => 'first-name'
+            )
+        );
+        
+        $this->settings_API->set_settings( $args );
+    }
+
+    public function set_settings_sections() {
+        $args = array(
+            array(
+                'id'            => 'lbd-admin-index',
+                'title'         => 'Settings',
+                'callback'      => array( $this->callbacks, 'lbd_admin_section' ),
+                'page'          => 'lbd-plugin'
+            )
+        );
+
+        $this->settings_API->set_settings_sections( $args );
+    }
+
+    public function set_settings_fields() {
+        $args = array(
+            array(
+                'id'            => 'text-example',
+                'title'         => 'Text Example',
+                'callback'      => array( $this->callbacks, 'lbd_text_example' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'text-example',
+                    'class'         => 'example-class'
+                )
+                ),
+                array(
+                    'id'            => 'first-name',
+                    'title'         => 'First Name',
+                    'callback'      => array( $this->callbacks, 'lbd_first_name' ),
+                    'page'          => 'lbd-plugin',
+                    'section'       => 'lbd-admin-index',
+                    'args'          => array(
+                        'label_for'     => 'first-name',
+                        'class'         => 'example-class'
+                    )
+                )
+        );
+
+        $this->settings_API->set_settings_fields( $args );
     }
     
 }

@@ -12,7 +12,7 @@
  * Plugin Name:         LBD Test Plugin
  * Plugin URI:          https://israelmartins.com
  * Description:         A test plugin.
- * Version:             0.2.5
+ * Version:             0.2.6
  * Requires at least:   5.2
  * Requires PHP:        7.2
  * Author:              Israel Martins
@@ -51,7 +51,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Currently plugin version.
  */
-define( 'LBD_VERSION', '0.2.5' );
+define( 'LBD_VERSION', '0.2.6' );
 
 /**
  * Plugin name Constant

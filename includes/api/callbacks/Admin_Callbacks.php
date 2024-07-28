@@ -68,5 +68,25 @@ class Admin_Callbacks extends Controller {
 
         return require_once $widgets_dashboard;
     }
+
+    public function lbd_options_group( $input ) {
+        return $input;
+    }
+
+    public function lbd_admin_section() {
+        echo 'Check this section.';
+    }
+
+    public function lbd_text_example() {
+        $value = esc_attr( get_option( 'text-example' ) );
+        
+        echo '<input type="text" class="regular-text" name="text-example" value="' . $value . '" placeholder="Type here..." />';
+    }
+
+    public function lbd_first_name() {
+        $value = esc_attr( get_option( 'first-name' ) );
+
+        echo '<input type="text" class="regular-text" name="first-name" value="' . $value . '" placeholder="e.g., John Joe" />';
+    }
     
 }

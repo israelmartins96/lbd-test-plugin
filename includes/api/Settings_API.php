@@ -24,18 +24,39 @@ namespace Includes\API;
 class Settings_API {
     
     /**
-     * Array of admin pages.
+     * Plugin admin pages.
      *
      * @var array
      */
     public $admin_pages = array();
     
     /**
-     * Array of plugin admin sub-pages.
+     * Plugin admin sub-pages.
      *
      * @var array
      */
     public $admin_subpages = array();
+
+    /**
+     * Plugin admin settings
+     *
+     * @var array
+     */
+    public $settings = array();
+
+    /**
+     * Plugin admin settings sections
+     *
+     * @var array
+     */
+    public $settings_sections = array();
+
+    /**
+     * Plugin admin settings fields
+     *
+     * @var array
+     */
+    public $settings_fields = array();
 
     /**
      * Adds the admin menu
@@ -45,6 +66,10 @@ class Settings_API {
     public function register() {
         if ( ! empty( $this->admin_pages ) ) {
             add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+        }
+
+        if ( ! empty( $this->settings ) ) {
+            add_action( 'admin_init', array( $this, 'register_custom_fields' ) );
         }
     }
     
@@ -103,7 +128,7 @@ class Settings_API {
     }
 
     /**
-     * Prepares the admin menu pages from an arrays of admin pages
+     * Prepares the admin menu pages.
      *
      * @return void
      */
@@ -119,6 +144,62 @@ class Settings_API {
         }
     }
 
-    public function register_custom_fields() {}
+    /**
+     * Updates the plugin settings.
+     *
+     * @param array $settings
+     * @return void
+     */
+    public function set_settings( array $settings ) {
+        $this->settings = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Updates the settings sections.
+     *
+     * @param array $settings_sections
+     * @return void
+     */
+    public function set_settings_sections( array $settings_sections ) {
+        $this->settings_sections = $settings_sections;
+
+        return $this;
+    }
+
+    /**
+     * Updates the settings fields.
+     *
+     * @param array $settings_fields
+     * @return void
+     */
+    public function set_settings_fields( array $settings_fields ) {
+        $this->settings_fields = $settings_fields;
+        
+        return $this;
+    }
+
+    /**
+     * Prepares the admin custom fields.
+     *
+     * @return void
+     */
+    public function register_custom_fields() {
+        // Register setting
+        foreach ( $this->settings as $setting ) {
+            register_setting( $setting['option_group'], $setting['option_name'], ( isset( $setting['callback'] ) ? $setting['callback'] : '' ) );
+        }
+
+        // Add settings section
+        foreach ( $this->settings_sections as $settings_section ) {
+            add_settings_section( $settings_section['id'], $settings_section['title'], ( isset( $settings_section['callback'] ) ? $settings_section['callback'] : '' ), $settings_section['page'] );
+        }
+
+        // Add settings field
+        foreach ( $this->settings_fields as $settings_field ) {
+            add_settings_field( $settings_field['id'], $settings_field['title'], ( isset( $settings_field['callback'] ) ? $settings_field['callback'] : '' ), $settings_field['page'], $settings_field['section'], ( isset( $settings_field['args'] ) ? $settings_field['args'] : array() ) );
+        }
+    }
     
 }
