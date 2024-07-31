@@ -180,6 +180,11 @@ class Admin extends Controller {
         $this->set_subpages_positions();
     }
 
+    /**
+     * Adds custom fields options.
+     *
+     * @return void
+     */
     public function set_settings() {
         $args = array(
             array(
@@ -196,6 +201,11 @@ class Admin extends Controller {
         $this->settings_API->set_settings( $args );
     }
 
+    /**
+     * Adds custom fields sections.
+     *
+     * @return void
+     */
     public function set_settings_sections() {
         $args = array(
             array(
@@ -209,6 +219,11 @@ class Admin extends Controller {
         $this->settings_API->set_settings_sections( $args );
     }
 
+    /**
+     * Adds custom fields.
+     *
+     * @return void
+     */
     public function set_settings_fields() {
         $args = array(
             array(
@@ -221,18 +236,18 @@ class Admin extends Controller {
                     'label_for'     => 'text-example',
                     'class'         => 'example-class'
                 )
-                ),
-                array(
-                    'id'            => 'first-name',
-                    'title'         => 'First Name',
-                    'callback'      => array( $this->callbacks, 'lbd_first_name' ),
-                    'page'          => 'lbd-plugin',
-                    'section'       => 'lbd-admin-index',
-                    'args'          => array(
-                        'label_for'     => 'first-name',
-                        'class'         => 'example-class'
-                    )
+            ),
+            array(
+                'id'            => 'first-name',
+                'title'         => 'First Name',
+                'callback'      => array( $this->callbacks, 'lbd_first_name' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'first-name',
+                    'class'         => 'example-class'
                 )
+            )
         );
 
         $this->settings_API->set_settings_fields( $args );

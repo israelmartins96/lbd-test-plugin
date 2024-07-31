@@ -69,20 +69,41 @@ class Admin_Callbacks extends Controller {
         return require_once $widgets_dashboard;
     }
 
+    /**
+     * Callback for the lbd_options_group.
+     *
+     * @param [type] $input
+     * @return void
+     */
     public function lbd_options_group( $input ) {
         return $input;
     }
 
+    /**
+     * Callback for the lbd_admin_section.
+     *
+     * @return void
+     */
     public function lbd_admin_section() {
         echo 'Check this section.';
     }
 
+    /**
+     * Renders the custom field for the text-example custom option.
+     *
+     * @return void
+     */
     public function lbd_text_example() {
         $value = esc_attr( get_option( 'text-example' ) );
         
         echo '<input type="text" class="regular-text" name="text-example" value="' . $value . '" placeholder="Type here..." />';
     }
 
+    /**
+     * Renders the custom field for the first-name custom option.
+     *
+     * @return void
+     */
     public function lbd_first_name() {
         $value = esc_attr( get_option( 'first-name' ) );
 
