@@ -12,7 +12,7 @@
  * Plugin Name:         LBD Test Plugin
  * Plugin URI:          https://israelmartins.com
  * Description:         A test plugin.
- * Version:             0.2.6
+ * Version:             0.2.7
  * Requires at least:   5.2
  * Requires PHP:        7.2
  * Author:              Israel Martins
@@ -44,38 +44,47 @@ Copyright 2024 Lightbulb Devs
 */
 
 /**
- * Abort if this file is accessed directly
+ * Abort if this file is accessed directly.
  */
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Currently plugin version.
+ * Current plugin version.
+ * 
+ * @since   0.2.5
  */
-define( 'LBD_VERSION', '0.2.6' );
+define( 'LBD_VERSION', '0.2.7' );
 
 /**
- * Plugin name Constant
+ * Plugin name constant.
  * 
  * @since   0.2.1
  */
 define( 'PLUGIN', plugin_basename( __FILE__ ) );
 
 /**
- * Plugin root path constant
+ * Plugin root path constant.
  * 
  * @since   0.2.0
  */
 define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
- * Plugin URL constant
+ * Plugin URL constant.
  * 
  * @since   0.2.0
  */
 define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Require Composer Autoload
+ * Plugin admin pages suffix constant.
+ * 
+ * @since   0.2.7
+ */
+define( 'PLUGIN_ADMIN_SUFFIX', '_lbd-' );
+
+/**
+ * Require Composer Autoload.
  */
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
     require_once dirname( __FILE__ ) . '/vendor/autoload.php';
