@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.1.2
  */
 namespace Includes\Base;
 
@@ -33,10 +33,19 @@ class Enqueue extends Controller {
     }
 
     /**
-     * Prepares all the plugin's stylesheets and scripts for enqueuing
+     * Prepares all the plugin's stylesheets and scripts for enqueuing on the plugin's pages.
     */
-    // Admin
-    public function enqueue_admin_scripts() {
+    /**
+     * To enqueue the plugin's admin scripts only on the plugin's admin pages.
+     *
+     * @param string $hook_suffix
+     * @return void
+     */
+    public function enqueue_admin_scripts( $hook_suffix ) {
+        if ( ! str_contains( $hook_suffix, $this->plugin_admin_suffix ) ) {
+            return;
+        }
+        
         wp_enqueue_style( 'lbd-admin-style', $this->plugin_url . 'assets/admin/css/style.css' );
         wp_enqueue_script( 'lbd-admin-script', $this->plugin_url . 'assets/admin/js/script.js' );
     }
