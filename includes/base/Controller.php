@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.1.2
  */
 namespace Includes\Base;
 
@@ -52,6 +52,13 @@ class Controller {
     public $plugin_url;
 
     /**
+     * Prepared to store the URL suffix of plugin's admin pages.
+     *
+     * @var string
+     */
+    public $plugin_admin_suffix;
+
+    /**
      * Class constructor. Store plugin constants as variables.
      */
     public function __construct() {
@@ -62,6 +69,8 @@ class Controller {
         $this->plugin_path = PLUGIN_PATH;
         
         $this->plugin_url = PLUGIN_URL;
+
+        $this->plugin_admin_suffix = PLUGIN_ADMIN_SUFFIX;
     }
     
 }
