@@ -1,0 +1,42 @@
+{
+  "name": "lbd-test-plugin",
+  "version": "0.1.0",
+  "description": "Test WordPress plugin.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wordpress",
+    "gulp",
+    "js",
+    "scss",
+    "php"
+  ],
+  "author": "Israel Martins",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babelify": "^10.0.0",
+    "browser-sync": "^3.0.2",
+    "browserify": "^17.0.0",
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.7.1",
+    "sass": "^1.77.8",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}

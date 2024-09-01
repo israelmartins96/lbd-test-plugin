@@ -46,8 +46,8 @@ class Enqueue extends Controller {
             return;
         }
         
-        wp_enqueue_style( 'lbd-admin-style', $this->plugin_url . 'assets/admin/css/style.css' );
-        wp_enqueue_script( 'lbd-admin-script', $this->plugin_url . 'assets/admin/js/script.js' );
+        wp_enqueue_style( 'lbd-admin-style', $this->plugin_url . 'assets/admin/css/style.min.css' );
+        wp_enqueue_script( 'lbd-admin-script', $this->plugin_url . 'assets/admin/js/script.min.js' );
     }
     
 }
