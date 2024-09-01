@@ -102,6 +102,7 @@ const tasksList = {
     default: 'default',
     style: 'style',
     js: 'js',
+    php: 'php',
     watch: 'watch',
     browserSync: 'browser-sync'
 };
@@ -110,6 +111,7 @@ const tasksList = {
 const tasksDefault = [
     tasksList.style,
     tasksList.js,
+    tasksList.php,
     tasksList.watch,
     tasksList.browserSync
 ];
@@ -220,6 +222,9 @@ gulp.task( tasksList.style, loadStyles );
 
 // To compile script. "gulp js" in CLI.
 gulp.task( tasksList.js, loadJavaScript );
+
+// To reload on PHP file changes. "gulp php" in CLI.
+gulp.task( tasksList.php, reload );
 
 // To watch for file changes. "gulp watch" in CLI.
 gulp.task( tasksList.watch, doWatch );
