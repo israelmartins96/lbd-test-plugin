@@ -89,6 +89,9 @@ const paths = {
         },
         watch: 'src/**/*.js'
     },
+    html: {
+        watch: './**/*.php'
+    },
     php: {
         watch: './**/*.php'
     }
@@ -102,7 +105,6 @@ const tasksList = {
     default: 'default',
     style: 'style',
     js: 'js',
-    php: 'php',
     watch: 'watch',
     browserSync: 'browser-sync'
 };
@@ -111,8 +113,6 @@ const tasksList = {
 const tasksDefault = [
     tasksList.style,
     tasksList.js,
-    tasksList.php,
-    tasksList.watch,
     tasksList.browserSync
 ];
 
@@ -190,25 +190,35 @@ const loadJavaScript = async () => {
 /**
  * Watches for specified tasks.
  */
-const doWatch = () => {
+const doWatch = async () => {
     // Watch for style updates.
     gulp.watch( paths.styles.watch, loadStyles );
     // Watch for script updates.
     gulp.watch( paths.scripts.watch, loadJavaScript );
-    // Watch for PHP updates.
-    gulp.watch( paths.php.watch, reload );
 };
 
 /**
  * Browser Sync.
  */
-const doBrowserSync = () => {
+const doBrowserSync = async () => {
     browserSync.init( {
         open: false,
         injectChanges: true,
         proxy: paths.projectURL,
         watch: true
     } );
+
+    /**
+     * Only used when not using the Gulp 'watch' task (i.e., when using 'browser-sync' task):
+     */
+    // Watch for style updates.
+    gulp.watch( paths.styles.watch, loadStyle );
+    // Watch for script updates.
+    gulp.watch( paths.scripts.watch, loadJavaScript );
+    // Watch for updates in the HTML files.
+    gulp.watch( paths.html.watch ).on( 'change', reload );
+    // Watch for updates in the PHP files.
+    gulp.watch( paths.php.watch ).on( 'change', reload );
 };
 
 /**
@@ -222,9 +232,6 @@ gulp.task( tasksList.style, loadStyles );
 
 // To compile script. "gulp js" in CLI.
 gulp.task( tasksList.js, loadJavaScript );
-
-// To reload on PHP file changes. "gulp php" in CLI.
-gulp.task( tasksList.php, reload );
 
 // To watch for file changes. "gulp watch" in CLI.
 gulp.task( tasksList.watch, doWatch );
