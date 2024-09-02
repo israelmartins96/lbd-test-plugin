@@ -7,13 +7,14 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.3
+ * @version             0.1.4
  */
 namespace Includes\Pages;
 
 use \Includes\Base\Controller;
 use \Includes\API\Settings_API;
 use \Includes\API\Callbacks\Admin_Callbacks;
+use \Includes\API\Callbacks\Management_Callbacks;
 
 /**
  * Admin Pages class.
@@ -40,6 +41,13 @@ class Admin extends Controller {
      * @var object
      */
     public $callbacks;
+
+    /**
+     * To store an instance of the Management_Callbacks.
+     *
+     * @var object
+     */
+    public $callbacks_mgmt;
 
     /**
      * To store the array of pages.
@@ -79,6 +87,9 @@ class Admin extends Controller {
 
         // Instance of the plugin's Admin_Callbacks class.
         $this->callbacks = new Admin_Callbacks();
+
+        // Instance of the plugin's Management_Callbacks class.
+        $this->callbacks_mgmt = new Management_Callbacks();
 
         // Popuplate the plugin's main admin page array.
         $this->set_pages();
@@ -188,13 +199,49 @@ class Admin extends Controller {
     public function set_settings() {
         $args = array(
             array(
-                'option_group'  => 'lbd_options_group',
-                'option_name'   => 'text-example',
-                'callback'      => array( $this->callbacks, 'lbd_options_group' )
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'cpt-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
             ),
             array(
-                'option_group'  => 'lbd_options_group',
-                'option_name'   => 'first-name'
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'taxonomy-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'media-widget-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'gallery-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'testimonial-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'custom-template-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'ajax-login-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'membership-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
+            ),
+            array(
+                'option_group'  => 'lbd_plugin_settings',
+                'option_name'   => 'chat-mgmt',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
             )
         );
         
@@ -211,7 +258,7 @@ class Admin extends Controller {
             array(
                 'id'            => 'lbd-admin-index',
                 'title'         => 'Settings',
-                'callback'      => array( $this->callbacks, 'lbd_admin_section' ),
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_admin_manager' ),
                 'page'          => 'lbd-plugin'
             )
         );
@@ -227,25 +274,102 @@ class Admin extends Controller {
     public function set_settings_fields() {
         $args = array(
             array(
-                'id'            => 'text-example',
-                'title'         => 'Text Example',
-                'callback'      => array( $this->callbacks, 'lbd_text_example' ),
+                'id'            => 'cpt-mgmt',
+                'title'         => 'CPT Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
                 'page'          => 'lbd-plugin',
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
-                    'label_for'     => 'text-example',
-                    'class'         => 'example-class'
+                    'label_for'     => 'cpt-mgmt',
+                    'class'         => 'ui-toggle'
                 )
             ),
             array(
-                'id'            => 'first-name',
-                'title'         => 'First Name',
-                'callback'      => array( $this->callbacks, 'lbd_first_name' ),
+                'id'            => 'taxonomy-mgmt',
+                'title'         => 'Taxonomy Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
                 'page'          => 'lbd-plugin',
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
-                    'label_for'     => 'first-name',
-                    'class'         => 'example-class'
+                    'label_for'     => 'taxonomy-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'media-widget-mgmt',
+                'title'         => 'Media Widget Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'media-widget-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'gallery-mgmt',
+                'title'         => 'Gallery Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'gallery-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'testimonial-mgmt',
+                'title'         => 'Testimonial Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'testimonial-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'custom-template-mgmt',
+                'title'         => 'Custom Template Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'custom-template-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'ajax-login-mgmt',
+                'title'         => 'AJAX Login/Register Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'ajax-login-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'membership-mgmt',
+                'title'         => 'Membership Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'membership-mgmt',
+                    'class'         => 'ui-toggle'
+                )
+            ),
+            array(
+                'id'            => 'chat-mgmt',
+                'title'         => 'CPT Manager',
+                'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
+                'page'          => 'lbd-plugin',
+                'section'       => 'lbd-admin-index',
+                'args'          => array(
+                    'label_for'     => 'chat-mgmt',
+                    'class'         => 'ui-toggle'
                 )
             )
         );

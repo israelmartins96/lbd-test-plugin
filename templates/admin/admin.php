@@ -41,7 +41,7 @@
             <!-- Settings Fields -->
             <form method="post" action="options.php">
                 <?php
-                    settings_fields( 'lbd_options_group' );
+                    settings_fields( 'lbd_plugin_settings' );
                     do_settings_sections( 'lbd-plugin' );
                     submit_button();
                 ?>

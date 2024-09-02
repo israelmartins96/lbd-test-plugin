@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes\API\Callbacks;
 
@@ -67,25 +67,6 @@ class Admin_Callbacks extends Controller {
         $widgets_dashboard = $this->plugin_path . 'templates/admin/widgets.php';
 
         return require_once $widgets_dashboard;
-    }
-
-    /**
-     * Callback for the lbd_options_group.
-     *
-     * @param [type] $input
-     * @return void
-     */
-    public function lbd_options_group( $input ) {
-        return $input;
-    }
-
-    /**
-     * Callback for the lbd_admin_section.
-     *
-     * @return void
-     */
-    public function lbd_admin_section() {
-        echo 'Check this section.';
     }
 
     /**
