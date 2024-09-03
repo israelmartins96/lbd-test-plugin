@@ -1,0 +1,37 @@
+/** Admin Header > Settings Tabs **/
+.lbd-admin-header .nav .tab {
+    padding: $lbd-admin-pad-tab;
+    border: $lbd-admin-border-tab;
+    border-bottom: none;
+    border-radius: $lbd-admin-border-radius-tab;
+    color: $lbd-admin-font-tab-colour;
+    font-size: $lbd-admin-font-tab-size;
+    font-weight: $lbd-admin-font-tab-weight;
+}
+
+.lbd-admin-header .nav .tab:not(.active):hover,
+.lbd-admin-header .nav .tab:not(.active):focus,
+.lbd-admin-header .nav .tab:not(.active):active {
+    background: $lbd-admin-bg-hover-tab-inactive;
+}
+
+.lbd-admin-header .nav .tab.active,
+.lbd-admin-header .nav .tab.active:hover,
+.lbd-admin-header .nav .tab.active:focus,
+.lbd-admin-header .nav .tab.active:active {
+    cursor: default;
+    pointer-events: none !important;
+}
+
+.lbd-admin-header .nav .active {
+    background: $lbd-admin-bg-tab-active;
+}
+
+/** Tab Content **/
+.tab-content .tab-pane {
+    display: none;
+}
+
+.tab-content .tab-pane.active {
+    display: block;
+}

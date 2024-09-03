@@ -1,0 +1,12 @@
+/** Admin Header **/
+.lbd-admin-header {
+    background: $lbd-admin-bg-colour-header;
+}
+
+/** Admin Header > Screen Heading **/
+.lbd-admin-header .screen-heading {
+    padding: $lbd-admin-pad-screen-heading;
+    margin: $lbd-admin-margin-screen-heading;
+    font-size: $lbd-admin-font-screen-heading-size;
+    font-weight: $lbd-admin-font-screen-heading-weight;
+}

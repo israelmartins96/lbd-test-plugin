@@ -272,6 +272,8 @@ class Admin extends Controller {
      * @return void
      */
     public function set_settings_fields() {
+        $checkbox_class = 'lbd-feature';
+        
         $args = array(
             array(
                 'id'            => 'cpt-mgmt',
@@ -281,7 +283,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'cpt-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -292,7 +294,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'taxonomy-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -303,7 +305,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'media-widget-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -314,7 +316,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'gallery-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -325,7 +327,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'testimonial-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -336,7 +338,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'custom-template-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -347,7 +349,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'ajax-login-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -358,7 +360,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'membership-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             ),
             array(
@@ -369,7 +371,7 @@ class Admin extends Controller {
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'label_for'     => 'chat-mgmt',
-                    'class'         => 'ui-toggle'
+                    'class'         => $checkbox_class
                 )
             )
         );

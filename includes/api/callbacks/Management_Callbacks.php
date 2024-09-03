@@ -45,13 +45,15 @@ class Management_Callbacks extends Controller {
     }
 
     public function lbd_settings_checkbox( $args ) {
-        $classes = esc_attr( $args[ 'class' ] );
-        $name = esc_attr( $args[ 'label_for' ] );
-        $value = get_option( $name );
+        $checkbox_classes = 'toggle-checkbox';
+        $checkbox_name = esc_attr( $args[ 'label_for' ] );
+        $value = get_option( $checkbox_name );
         
-        $checkbox = '<input type="checkbox" id="' . $name . '" class="' . $classes . '" name="' . $name . '" value="1" placeholder="Type here..."' . ( $value ? 'checked="checked"' : '' ) . ' />';
+        $checkbox = '<input type="checkbox" id="' . $checkbox_name . '" class="' . $checkbox_classes . '" name="' . $checkbox_name . '" value="1" placeholder="Type here..."' . ( $value ? 'checked="checked"' : '' ) . ' />';
 
-        echo $checkbox;
+        $checkbox_label = '<label for="' . $checkbox_name . '" class="toggle-switch"></label>';
+
+        echo '<div class="toggle-switch-container">' . $checkbox . $checkbox_label . '</div>';
     }
     
 }
