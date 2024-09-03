@@ -90,7 +90,7 @@ const paths = {
         watch: 'src/**/*.js'
     },
     html: {
-        watch: './**/*.php'
+        watch: './**/*.html'
     },
     php: {
         watch: './**/*.php'
@@ -212,9 +212,9 @@ const doBrowserSync = async () => {
      * Only used when not using the Gulp 'watch' task (i.e., when using 'browser-sync' task):
      */
     // Watch for style updates.
-    gulp.watch( paths.styles.watch, loadStyle );
+    gulp.watch( paths.styles.watch, loadStyles ).on( 'change', reload );
     // Watch for script updates.
-    gulp.watch( paths.scripts.watch, loadJavaScript );
+    gulp.watch( paths.scripts.watch, loadJavaScript ).on( 'change', reload );
     // Watch for updates in the HTML files.
     gulp.watch( paths.html.watch ).on( 'change', reload );
     // Watch for updates in the PHP files.
