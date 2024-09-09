@@ -1,0 +1,38 @@
+.toggle-switch-container {
+    width: fit-content;
+}
+
+.toggle-checkbox {
+    display: none !important;
+    
+    &+.toggle-switch {
+    display: block;
+    position: relative;
+    background: $toggle-switch-bg-off;
+    border-radius: $toggle-switch-border-radius;
+    height: 1.25rem;
+    width: 2rem;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            background: #fefefe;
+            border: $toggle-switch-knob-border;
+            border-radius: $toggle-switch-border-radius;
+            height: 1.25rem;
+            width: 1.25rem;
+            transform: translateY( -50% );
+        }
+    }
+    
+    &:checked+.toggle-switch {
+        background: $toggle-switch-bg-on;
+        
+        &::after {
+            left: unset;
+            right: 0;
+        }
+    }
+}
