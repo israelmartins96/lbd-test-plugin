@@ -1,30 +1,9 @@
-/** General Classes **/
-#wpcontent #wpbody #wpbody-content .pagewrap * {
-    box-shadow: none !important;
-}
-
 /** General Elements **/
 a {
     text-decoration: none;
 }
 
-/* Padding */
-.pad-bottom-quart {
-    padding-bottom: 0.25rem;
-}
-
-.pad-top-1 {
-    padding-top: 1rem;
-}
-
-.pad-right-2 {
-    padding-right: 2rem;
-}
-
-.pad-bottom-2 {
-    padding-bottom: 2rem;
-}
-
-.pad-left-2 {
-    padding-left: 2rem !important;
+/** General Selectors **/
+#wpcontent #wpbody #wpbody-content .pagewrap * {
+    box-shadow: none !important;
 }

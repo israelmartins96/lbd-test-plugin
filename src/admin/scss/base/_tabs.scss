@@ -1,37 +1,47 @@
-/** Admin Header > Settings Tabs **/
-.lbd-admin-header .nav .tab {
-    padding: $lbd-admin-pad-tab;
-    border: $lbd-admin-border-tab;
-    border-bottom: none;
-    border-radius: $lbd-admin-border-radius-tab;
-    color: $lbd-admin-font-tab-colour;
-    font-size: $lbd-admin-font-tab-size;
-    font-weight: $lbd-admin-font-tab-weight;
-}
+/** Admin Settings Tabs **/
+.lbd-admin-header .nav {
+    padding-left: 2rem;
+    
+    /** Admin Settings Tab **/
+    .tab {
+        padding: $admin_tab-pad;
+        @include admin_tab-border();
+        border-bottom: none;
+        @include admin_tab-border_radius();
+        @include admin_tab-bg();
+        color: admin_tab-font( colour );
+        font-size: admin_tab-font( size );
+        font-weight: admin_tab-font( weight );
 
-.lbd-admin-header .nav .tab:not(.active):hover,
-.lbd-admin-header .nav .tab:not(.active):focus,
-.lbd-admin-header .nav .tab:not(.active):active {
-    background: $lbd-admin-bg-hover-tab-inactive;
-}
+        &:not(.active):hover,
+        &:not(.active):focus,
+        &:not(.active):active {
+            @include admin_tab-bg( hover );
+        }
 
-.lbd-admin-header .nav .tab.active,
-.lbd-admin-header .nav .tab.active:hover,
-.lbd-admin-header .nav .tab.active:focus,
-.lbd-admin-header .nav .tab.active:active {
-    cursor: default;
-    pointer-events: none !important;
-}
+        &.active {
+            @include admin_tab-bg( active );
+        }
 
-.lbd-admin-header .nav .active {
-    background: $lbd-admin-bg-tab-active;
+        &.active,
+        &.active:hover,
+        &.active:focus,
+        &.active:active {
+            cursor: default;
+            pointer-events: none !important;
+        }
+    }
 }
 
 /** Tab Content **/
-.tab-content .tab-pane {
-    display: none;
-}
+.tab-content {
+    padding: $admin_tab_content-pad;
 
-.tab-content .tab-pane.active {
-    display: block;
+    .tab-pane {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
 }

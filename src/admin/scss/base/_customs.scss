@@ -1,12 +1,19 @@
 /** Customs **/
 #wpcontent {
     padding-left: 0;
+    
+    #wpbody #wpbody-content .wrap {
+        margin: 0;
+    }
 }
 
-#wpcontent #wpbody #wpbody-content .wrap {
-    margin: 0;
-}
-
-.notice, .error, .updated {
+.notice,
+.error,
+.updated {
     margin: 0 !important;
+}
+
+.notice.notice-warning.update-nag.inline {
+    position: absolute;
+    animation: blink 5s infinite;
 }

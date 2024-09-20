@@ -1,12 +1,13 @@
 /** Admin Header **/
 .lbd-admin-header {
-    background: $lbd-admin-bg-colour-header;
-}
+    background: $admin_header-bg;
+    padding: $admin_header-pad;
 
-/** Admin Header > Screen Heading **/
-.lbd-admin-header .screen-heading {
-    padding: $lbd-admin-pad-screen-heading;
-    margin: $lbd-admin-margin-screen-heading;
-    font-size: $lbd-admin-font-screen-heading-size;
-    font-weight: $lbd-admin-font-screen-heading-weight;
+    /** Admin Header > Screen Heading **/
+    .screen-heading {
+        padding: $admin_screen_heading-pad;
+        margin: $admin_screen_heading-margin;
+        font-size: admin_screen_heading-font( size );
+        font-weight: admin_screen_heading-font( weight );
+    }
 }

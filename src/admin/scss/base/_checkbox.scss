@@ -1,35 +1,41 @@
+/** Toggle Switch Container **/
 .toggle-switch-container {
     width: fit-content;
 }
 
+/** Toggle Checkbox **/
 .toggle-checkbox {
     display: none !important;
     
+    /** Toggle Switch **/
     &+.toggle-switch {
     display: block;
     position: relative;
-    background: $toggle-switch-bg-off;
-    border-radius: $toggle-switch-border-radius;
+    @include admin_toggle_switch-bg( off );
+    border-radius: $admin_toggle_switch-border_radius;
     height: 1.25rem;
     width: 2rem;
 
+        /** Toggle Switch Knob **/
         &::after {
             content: "";
             position: absolute;
             top: 50%;
             left: 0;
             background: #fefefe;
-            border: $toggle-switch-knob-border;
-            border-radius: $toggle-switch-border-radius;
+            border: $admin_toggle_switch_knob-border;
+            border-radius: $admin_toggle_switch-border_radius;
             height: 1.25rem;
             width: 1.25rem;
             transform: translateY( -50% );
         }
     }
     
+    /** Toggle Switch Enabled **/
     &:checked+.toggle-switch {
-        background: $toggle-switch-bg-on;
-        
+        @include admin_toggle_switch-bg();
+
+        /** Toggle Switch Knob **/
         &::after {
             left: unset;
             right: 0;

@@ -1,0 +1,17 @@
+/** Tabs **/
+@mixin admin_tab-bg( $state: default ) {
+    background: map-get( $admin_tab-bg, $state );
+}
+
+@mixin admin_tab-border() {
+    border: map-get( $admin_tab-border, width ) map-get( $admin_tab-border, type ) map-get( $admin_tab-border, colour );
+}
+
+@mixin admin_tab-border_radius() {
+    border-radius: map-get( $admin_tab-border, radius );
+}
+
+/** Toggle Switch **/
+@mixin admin_toggle_switch-bg( $state: on ) {
+    background: map-get( $admin_toggle_switch-bg, $state );
+}

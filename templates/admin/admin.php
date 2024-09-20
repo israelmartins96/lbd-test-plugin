@@ -7,20 +7,20 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Templates
- * @version             0.1.1
+ * @version             0.1.3
  */
 
 ?>
 
 <div class="pagewrap">
     <!-- Screen Header Section -->
-    <div class="lbd-admin-header pad-top-1 pad-right-2 pad-bottom-quart">
+    <div class="lbd-admin-header">
         <!-- Screen Heading -->
-        <h1 class="screen-heading pad-left-2">LBD Plugin Dashboard</h1>
+        <h1 class="screen-heading">LBD Plugin Dashboard</h1>
         <!-- /Screen Heading -->
         
         <!-- Settings Tabs -->
-        <nav class="nav nav-tabs pad-left-2" aria-label="Secondary menu">
+        <nav class="nav nav-tabs" aria-label="Secondary menu">
             <a href="#tab-1" class="tab active">Manage Settings</a>
             <a href="#tab-2" class="tab">Updates</a>
             <a href="#tab-3" class="tab">About</a>
@@ -30,10 +30,10 @@
     <!-- /Screen Header Section -->
 
     <!-- Tab Content -->
-    <div class="tab-content pad-top-1 pad-right-2 pad-left-2">
+    <div class="tab-content">
         <?php
-        // Settings Feedback
-        settings_errors();
+            // Settings Feedback
+            settings_errors();
         ?>
         
         <!-- First Tab -->

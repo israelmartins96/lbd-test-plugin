@@ -1,0 +1,9 @@
+/** Screen Heading **/
+@function admin_screen_heading-font( $prop ) {
+    @return map-get( $admin_screen_heading-font, $prop );
+}
+
+/** Tabs **/
+@function admin_tab-font( $prop ) {
+    @return map-get( $admin_tab-font, $prop );
+}

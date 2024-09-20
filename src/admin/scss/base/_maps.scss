@@ -1,0 +1,31 @@
+/** Screen Heading **/
+$admin_screen_heading-font: (
+    "size": 1.5rem,
+    "weight": 400
+);
+
+/** Tabs **/
+$admin_tab-bg: (
+    "default": #fefefe,
+    "active": #f0f0f1,
+    "hover": #e6e6e6
+);
+
+$admin_tab-border: (
+    "colour": #e6e6e6,
+    "radius": 0.5rem 0.5rem 0 0,
+    "type": solid,
+    "width": 0.125rem
+);
+
+$admin_tab-font: (
+    "colour": #3e3e3e,
+    "size": 1rem,
+    "weight": 500
+);
+
+/** Toggle Switch **/
+$admin_toggle_switch-bg: (
+    "on": #2271B1,
+    "off": #ddd
+);

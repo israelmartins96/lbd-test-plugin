@@ -1,21 +1,13 @@
+/** Screen Heading **/
+$admin_header-bg: #fefefe;
+$admin_header-pad: 1rem 2rem 0.25rem 0;
+$admin_screen_heading-pad: 0.5rem 0 0.5rem 2rem;
+$admin_screen_heading-margin: 0 0 1.5rem;
+
 /** Tabs **/
-$lbd-admin-bg-colour-header: #fefefe;
-$lbd-admin-bg-tab-active: #f0f0f1;
-$lbd-admin-bg-hover-tab-inactive: #e6e6e6;
-$lbd-admin-pad-screen-heading: 0.5rem 0;
-$lbd-admin-pad-tab: 0.25rem 0.75rem;
-$lbd-admin-margin-screen-heading: 0 0 1.5rem;
-$lbd-admin-border-colour-tab: #e6e6e6;
-$lbd-admin-border-tab: 0.125rem solid $lbd-admin-border-colour-tab;
-$lbd-admin-border-radius-tab: 0.5rem 0.5rem 0 0;
-$lbd-admin-font-screen-heading-size: 1.5rem;
-$lbd-admin-font-screen-heading-weight: 400;
-$lbd-admin-font-tab-colour: #3e3e3e;
-$lbd-admin-font-tab-size: 1rem;
-$lbd-admin-font-tab-weight: 500;
+$admin_tab-pad: 0.25rem 0.75rem;
+$admin_tab_content-pad: 1rem 2rem 0;
 
 /** Toggle Switch **/
-$toggle-switch-knob-border: 1px solid #ccc;
-$toggle-switch-border-radius: 1rem;
-$toggle-switch-bg-on: #2271B1;
-$toggle-switch-bg-off: #ddd;
+$admin_toggle_switch-border_radius: 1rem;
+$admin_toggle_switch_knob-border: 1px solid #ccc;
