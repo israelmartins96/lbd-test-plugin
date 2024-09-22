@@ -11,8 +11,9 @@
     &+.toggle-switch {
     display: block;
     position: relative;
-    @include admin_toggle_switch-bg( off );
+    padding: 0.125rem;
     border-radius: $admin_toggle_switch-border_radius;
+    @include admin_toggle_switch-bg( off );
     height: 1.25rem;
     width: 2rem;
 
@@ -39,6 +40,7 @@
         &::after {
             left: unset;
             right: 0;
+            border-color: map-get( $admin_toggle_switch-bg, on );
         }
     }
 }
