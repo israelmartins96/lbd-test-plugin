@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.2
+ * @version             0.1.3
  */
 namespace Includes\Base;
 
@@ -59,6 +59,13 @@ class Controller {
     public $plugin_admin_suffix;
 
     /**
+     * To store the plugin's admin settings options' names and titles.
+     *
+     * @var array
+     */
+    public $settings_options = array();
+
+    /**
      * Class constructor. Store plugin constants as variables.
      */
     public function __construct() {
@@ -71,6 +78,18 @@ class Controller {
         $this->plugin_url = PLUGIN_URL;
 
         $this->plugin_admin_suffix = PLUGIN_ADMIN_SUFFIX;
+
+        $this->settings_options = array(
+            'cpt-mgmt'              => 'CPT Manager',
+            'taxonomy-mgmt'         => 'Taxonomy Manager',
+            'media-widget-mgmt'     => 'Media Widget Manager',
+            'gallery-mgmt'          => 'Gallery Manager',
+            'testimonial-mgmt'      => 'Testimonial Manager',
+            'custom-template-mgmt'  => 'Custom Template Manager',
+            'ajax-login-mgmt'       => 'AJAX Login/Register Manager',
+            'membership-mgmt'       => 'Membership Manager',
+            'chat-mgmt'             => 'CPT Manager'
+        );
     }
     
 }
