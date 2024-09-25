@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.5
+ * @version             0.1.6
  */
 namespace Includes\Pages;
 
@@ -197,15 +197,13 @@ class Admin extends Controller {
      * @return void
      */
     public function set_settings() {
-        $args = array();
-        
-        foreach ( $this->settings_options as $option_name ) {
-            $args[] = array(
+        $args = array(
+            array(
                 'option_group'  => 'lbd_plugin_settings',
-                'option_name'   => $option_name,
+                'option_name'   => 'lbd-plugin',
                 'callback'      => array( $this->callbacks_mgmt, 'lbd_checkbox_sanitise' )
-            );
-        }
+            )
+        );
         
         $this->settings_API->set_settings( $args );
     }
@@ -238,15 +236,16 @@ class Admin extends Controller {
         
         $args = array();
 
-        foreach ( $this->settings_options as $option_name => $title ) {
+        foreach ( $this->settings_options as $option_id => $title ) {
             $args[] = array(
-                'id'            => $option_name,
+                'id'            => $option_id,
                 'title'         => $title,
                 'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
                 'page'          => 'lbd-plugin',
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
-                    'label_for'     => $option_name,
+                    'option_name'   => 'lbd-plugin',
+                    'label_for'     => $option_id,
                     'class'         => $checkbox_class
                 )
             );
