@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes\API\Callbacks;
 
@@ -32,7 +32,13 @@ class Management_Callbacks extends Controller {
      * @return void
      */
     public function lbd_checkbox_sanitise( $input ) {
-        return ( isset( $input ) ? true : false );
+        $output = array();
+
+        foreach ( $this->settings_options as $option_id => $value ) {
+            $output[ $option_id ] = ( isset( $input[ $option_id ] ) ? true : false );
+        }
+        
+        return $output;
     }
 
     /**
@@ -44,12 +50,19 @@ class Management_Callbacks extends Controller {
         echo 'Manage the sections and features of the plugin.';
     }
 
+    /**
+     * Admin options checkbox markup.
+     *
+     * @param array $args
+     * @return void
+     */
     public function lbd_settings_checkbox( $args ) {
         $checkbox_classes = 'toggle-checkbox';
-        $checkbox_name = esc_attr( $args[ 'label_for' ] );
-        $value = get_option( $checkbox_name );
+        $checkbox_name = $args[ 'label_for' ];
+        $option_name = $args[ 'option_name' ];
+        $value = get_option( $option_name, $option_name );
         
-        $checkbox = '<input type="checkbox" id="' . $checkbox_name . '" class="' . $checkbox_classes . '" name="' . $checkbox_name . '" value="1" placeholder="Type here..."' . ( $value ? 'checked="checked"' : '' ) . ' />';
+        $checkbox = '<input type="checkbox" id="' . $checkbox_name . '" class="' . $checkbox_classes . '" name="' . $option_name . '[' . $checkbox_name . ']' . '" value="1" placeholder="Type here..."' . ( $value[ $checkbox_name ] ? 'checked="checked"' : '' ) . ' />';
 
         $checkbox_label = '<label for="' . $checkbox_name . '" class="toggle-switch"></label>';
 

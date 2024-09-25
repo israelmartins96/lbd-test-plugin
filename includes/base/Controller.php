@@ -88,7 +88,7 @@ class Controller {
             'custom-template-mgmt'  => 'Custom Template Manager',
             'ajax-login-mgmt'       => 'AJAX Login/Register Manager',
             'membership-mgmt'       => 'Membership Manager',
-            'chat-mgmt'             => 'CPT Manager'
+            'chat-mgmt'             => 'Chat Manager'
         );
     }
     
