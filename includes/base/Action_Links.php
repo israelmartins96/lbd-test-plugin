@@ -7,11 +7,11 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.1.2
  */
 namespace Includes\Base;
 
-use \Includes\Base\Controller;
+use \Includes\Base\Controller\Controller;
 
 /**
  * Updates plugin action links.

@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes;
 
@@ -31,9 +31,10 @@ final class Init {
     */
     public static function get_services() {
         $services = array(
-            Pages\Admin::class,
+            Pages\Dashboard::class,
             Base\Enqueue::class,
-            Base\Action_Links::class
+            Base\Action_Links::class,
+            Base\Controller\Post_Type::class
         );
         
         return $services;

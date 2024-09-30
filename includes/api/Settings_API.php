@@ -64,7 +64,7 @@ class Settings_API {
      * @return void
      */
     public function register() {
-        if ( ! empty( $this->admin_pages ) ) {
+        if ( ! empty( $this->admin_pages ) || ! empty( $this->admin_subpages ) ) {
             add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
         }
 

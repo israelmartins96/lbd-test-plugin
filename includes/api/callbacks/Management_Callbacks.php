@@ -7,11 +7,11 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.2
+ * @version             0.1.3
  */
 namespace Includes\API\Callbacks;
 
-use \Includes\Base\Controller;
+use \Includes\Base\Controller\Controller;
 
 /**
  * Plugin management settings callbacks class.
@@ -34,8 +34,8 @@ class Management_Callbacks extends Controller {
     public function lbd_checkbox_sanitise( $input ) {
         $output = array();
 
-        foreach ( $this->settings_options as $option_id => $value ) {
-            $output[ $option_id ] = ( isset( $input[ $option_id ] ) ? true : false );
+        foreach ( $this->settings_sections as $section_id => $value ) {
+            $output[ $section_id ] = ( isset( $input[ $section_id ] ) ? true : false );
         }
         
         return $output;
@@ -58,15 +58,15 @@ class Management_Callbacks extends Controller {
      */
     public function lbd_settings_checkbox( $args ) {
         $checkbox_classes = 'toggle-checkbox';
-        $feature_id = $args[ 'label_for' ];
+        $section_id = $args[ 'label_for' ];
         $option_name = $args[ 'option_name' ];
         $value = get_option( $option_name, $option_name );
 
-        $is_checked = isset( $value[ $feature_id ] ) ? ( ( $value[ $feature_id ] ? true : false ) ) : false;
+        $is_checked = isset( $value[ $section_id ] ) ? ( ( $value[ $section_id ] ? true : false ) ) : false;
         
-        $checkbox = '<input type="checkbox" id="' . $feature_id . '" class="' . $checkbox_classes . '" name="' . $option_name . '[' . $feature_id . ']' . '" value="1" placeholder="Type here..."' . ( $is_checked ? 'checked="checked"' : '' ) . ' />';
+        $checkbox = '<input type="checkbox" id="' . $section_id . '" class="' . $checkbox_classes . '" name="' . $option_name . '[' . $section_id . ']' . '" value="1" placeholder="Type here..."' . ( $is_checked ? 'checked="checked"' : '' ) . ' />';
 
-        $checkbox_label = '<label for="' . $feature_id . '" class="toggle-switch"></label>';
+        $checkbox_label = '<label for="' . $section_id . '" class="toggle-switch"></label>';
 
         echo '<div class="toggle-switch-container">' . $checkbox . $checkbox_label . '</div>';
     }

@@ -3,15 +3,15 @@
 /**
  * Admin Pages
  * 
- * @since               0.2.0
+ * @since               0.3.0
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.6
+ * @version             0.1.0
  */
 namespace Includes\Pages;
 
-use \Includes\Base\Controller;
+use \Includes\Base\Controller\Controller;
 use \Includes\API\Settings_API;
 use \Includes\API\Callbacks\Admin_Callbacks;
 use \Includes\API\Callbacks\Management_Callbacks;
@@ -21,12 +21,12 @@ use \Includes\API\Callbacks\Management_Callbacks;
  * 
  * Admin pages class.
  * 
- * @since               0.2.0
+ * @since               0.3.0
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
-class Admin extends Controller {
+class Dashboard extends Controller {
 
     /**
      * To store an instance of the Settings_API.
@@ -55,13 +55,6 @@ class Admin extends Controller {
      * @var array
      */
     public $pages = array();
-
-    /**
-     * To store the array of sub-pages of the plugin admin dashboard.
-     *
-     * @var array
-     */
-    public $subpages = array();
 
     /**
      * Gets the plugin menu icon.
@@ -93,9 +86,6 @@ class Admin extends Controller {
 
         // Popuplate the plugin's main admin page array.
         $this->set_pages();
-
-        // Popuplate the plugin's admin sub-pages array.
-        $this->set_subpages();
         
         $this->set_settings();
 
@@ -104,7 +94,7 @@ class Admin extends Controller {
         $this->set_settings_fields();
         
         // Adds the plugin admin pages and sub-pages
-        $this->settings_API->add_pages( $this->pages )->with_subpage( 'Dashboard' )->add_subpages( $this->subpages )->register();
+        $this->settings_API->add_pages( $this->pages )->with_subpage( 'Dashboard' )->register();
     }
 
     /**
@@ -124,71 +114,6 @@ class Admin extends Controller {
                 'position'      => 110
             )
         );
-    }
-
-    /**
-     * Updates the menu positions of the plugin's admin sub-pages.
-     *
-     * @return void
-     */
-    public function set_subpages_positions() {
-        // The number of sub-pages.
-        $subpages_count = count( $this->subpages );
-
-        // The starting index for looping through the sub pages.
-        $index = 0;
-
-        // The sub-menu position of main sub-page.
-        $position = 1;
-
-        // Loop through the array of sub-pages and assign their positions sequentially, starting from the second sub-menu position.
-        while ( $index < $subpages_count ) {
-            $position++;
-            
-            $this->subpages[ $index ]['position'] = $position;
-            
-            $index++;
-        }
-    }
-
-    /**
-     * Popuplates the plugin's admin sub-pages array.
-     *
-     * @return void
-     */
-    public function set_subpages() {
-        $this->subpages = array(
-            array(
-                'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Post Types',
-                'menu_title'    => 'Custom Post Types',
-                'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-custom-post-types',
-                'callback'      => array( $this->callbacks, 'custom_post_types_dashboard' ),
-                'position'      => 0
-            ),
-            array(
-                'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Taxonomies',
-                'menu_title'    => 'Taxonomies',
-                'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-taxonomies',
-                'callback'      => array( $this->callbacks, 'taxonomies_dashboard' ),
-                'position'      => 0
-            ),
-            array(
-                'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Widgets',
-                'menu_title'    => 'Widgets',
-                'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-widgets',
-                'callback'      => array( $this->callbacks, 'widgets_dashboard' ),
-                'position'      => 0
-            )
-        );
-
-        // Sequentially update the menu positions of the plugin's admin sub-pages.
-        $this->set_subpages_positions();
     }
 
     /**
@@ -236,16 +161,16 @@ class Admin extends Controller {
         
         $args = array();
 
-        foreach ( $this->settings_options as $option_id => $title ) {
+        foreach ( $this->settings_sections as $section_id => $title ) {
             $args[] = array(
-                'id'            => $option_id,
+                'id'            => $section_id,
                 'title'         => $title,
                 'callback'      => array( $this->callbacks_mgmt, 'lbd_settings_checkbox' ),
                 'page'          => 'lbd-plugin',
                 'section'       => 'lbd-admin-index',
                 'args'          => array(
                     'option_name'   => 'lbd-plugin',
-                    'label_for'     => $option_id,
+                    'label_for'     => $section_id,
                     'class'         => $checkbox_class
                 )
             );

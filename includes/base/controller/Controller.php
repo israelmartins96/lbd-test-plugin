@@ -7,9 +7,9 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.3
+ * @version             0.1.4
  */
-namespace Includes\Base;
+namespace Includes\Base\Controller;
 
 /**
  * Plugin Controller class.
@@ -63,12 +63,20 @@ class Controller {
      *
      * @var array
      */
-    public $settings_options = array();
+    public $settings_sections = array();
 
     /**
-     * Class constructor. Store plugin constants as variables.
+     * To store the ID of the settings section.
+     *
+     * @var string
+     */
+    public $settings_section_id = '';
+    
+    /**
+     * Class constructor.
      */
     public function __construct() {
+        // Store plugin constants as variables.
         $this->plugin = PLUGIN;
 
         $this->plugin_version = LBD_VERSION;
@@ -79,7 +87,8 @@ class Controller {
 
         $this->plugin_admin_suffix = PLUGIN_ADMIN_SUFFIX;
 
-        $this->settings_options = array(
+        // Array of the plugin's settings sections.
+        $this->settings_sections = array(
             'cpt-mgmt'              => 'CPT Manager',
             'taxonomy-mgmt'         => 'Taxonomy Manager',
             'media-widget-mgmt'     => 'Media Widget Manager',
@@ -92,4 +101,38 @@ class Controller {
         );
     }
     
+    /**
+     * Updates the menu positions of the plugin's admin sub-pages.
+     *
+     * @return void
+     */
+    public function set_subpages_positions( $subpages ) {
+        // The number of sub-pages.
+        $subpages_count = count( $subpages );
+
+        // The starting index for looping through the sub pages.
+        $index = 0;
+
+        // The sub-menu position of main sub-page.
+        $position = 1;
+
+        // Loop through the array of sub-pages and assign their positions sequentially, starting from the second sub-menu position.
+        while ( $index < $subpages_count ) {
+            $position++;
+            
+            $subpages[ $index ]['position'] = $position;
+            
+            $index++;
+        }
+    }
+
+    public function is_settings_section_activated( $section_id ) {
+        $option = get_option( 'lbd-plugin', 'lbd-plugin' );
+        $section = $option[ $section_id ];
+        
+        $is_section_activated = isset( $section ) ? $section : false;
+
+        return $is_section_activated;
+    }
+
 }
