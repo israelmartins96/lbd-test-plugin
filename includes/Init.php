@@ -34,7 +34,15 @@ final class Init {
             Pages\Dashboard::class,
             Base\Enqueue::class,
             Base\Action_Links::class,
-            Base\Controller\Post_Type::class
+            Base\Controller\Post_Type::class,
+            Base\Controller\Taxonomy::class,
+            Base\Controller\Media_Widget::class,
+            Base\Controller\Gallery::class,
+            Base\Controller\Testimonial::class,
+            Base\Controller\Template::class,
+            Base\Controller\AJAX_Login::class,
+            Base\Controller\Membership::class,
+            Base\Controller\Chat::class
         );
         
         return $services;

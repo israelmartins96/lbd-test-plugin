@@ -89,7 +89,7 @@ class Controller {
 
         // Array of the plugin's settings sections.
         $this->settings_sections = array(
-            'cpt-mgmt'              => 'CPT Manager',
+            'custom-post-type-mgmt' => 'CPT Manager',
             'taxonomy-mgmt'         => 'Taxonomy Manager',
             'media-widget-mgmt'     => 'Media Widget Manager',
             'gallery-mgmt'          => 'Gallery Manager',

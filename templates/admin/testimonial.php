@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This template displays the plugin's widgets management page in the WP Admin.
+ * This template displays the plugin's Testimonials management page in the WP Admin.
  * 
- * @since               0.2.5
+ * @since               0.3.0
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Templates
@@ -12,4 +12,4 @@
 
 ?>
 
-<h1>Widgets Manager</h1>
+<h1>Testimonials Manager</h1>

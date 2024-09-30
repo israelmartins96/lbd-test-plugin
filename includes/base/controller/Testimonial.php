@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Plugin Post Type Controller
+ * Plugin Testimonial.
  * 
  * @since               0.3.0
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.1.0
  */
 namespace Includes\Base\Controller;
 
@@ -15,16 +15,16 @@ use \Includes\Base\Controller\Controller;
 use \Includes\API\Settings_API;
 use \Includes\API\Callbacks\Admin_Callbacks;
 /**
- * Plugin Post Type Controller class.
+ * Plugin Testimonial class.
  * 
- * Plugin Post Type Controller class.
+ * Plugin Testimonial class.
  * 
  * @since               0.3.0
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
-class Post_Type extends Controller {
+class Testimonial extends Controller {
     /**
      * To store an instance of the Settings_API.
      *
@@ -40,22 +40,22 @@ class Post_Type extends Controller {
     public $callbacks;
 
     /**
-     * To store the array of sub-pages of the custom post type.
+     * To store the array of sub-pages of the testimonial.
      *
      * @var array
      */
     public $subpages = array();
 
     /**
-     * Prepares and adds the custom post type.
+     * Prepares and adds the testimonial.
      *
      * @return void
      */
     public function register() {
         // Set the settings section ID.
-        $this->settings_section_id = 'custom-post-type-mgmt';
+        $this->settings_section_id = 'testimonial-mgmt';
         
-        // Do not load the custom post type and it's management section if its option is not activated.
+        // Do not load the testimonial and it's management section if its option is not activated.
         if ( ! $this->is_settings_section_activated( $this->settings_section_id ) ) {
             return;
         }
@@ -71,27 +71,6 @@ class Post_Type extends Controller {
 
         // Adds the sub-pages.
         $this->settings_API->add_subpages( $this->subpages )->register();
-        
-        // Creates the custom post type when WordPress is initialised.
-        add_action( 'init', array( $this, 'activate' ) );
-    }
-
-    /**
-     * Activates/Creates the custom post type.
-     *
-     * @return void
-     */
-    public function activate() {
-        $args = array(
-            'labels'        => array(
-                'name'          => 'Products',
-                'singular_name' => 'Product'
-            ),
-            'public'        => true,
-            'has_archive'   => true
-        );
-        
-        register_post_type( 'lbd_cpt', $args );
     }
 
     /**
@@ -103,12 +82,12 @@ class Post_Type extends Controller {
         $this->subpages = array(
             array(
                 'parent_slug'   => 'lbd-plugin',
-                'page_title'    => 'Custom Post Types',
-                'menu_title'    => 'Custom Post Types',
+                'page_title'    => 'Testimonial',
+                'menu_title'    => 'Testimonial',
                 'capability'    => 'manage_options',
-                'menu_slug'     => 'lbd-custom-post-type',
-                'callback'      => array( $this->callbacks, 'custom_post_type_dashboard' ),
-                'position'      => 1
+                'menu_slug'     => 'lbd-testimonial',
+                'callback'      => array( $this->callbacks, 'testimonial_dashboard' ),
+                'position'      => 5
             )
         );
 
