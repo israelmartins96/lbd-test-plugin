@@ -47,6 +47,13 @@ class Post_Type extends Controller {
     public $subpages = array();
 
     /**
+     * To store the custom post types added by the plugin.
+     *
+     * @var array
+     */
+    public $custom_post_types = array();
+
+    /**
      * Prepares and adds the custom post type.
      *
      * @return void
@@ -71,9 +78,38 @@ class Post_Type extends Controller {
 
         // Adds the sub-pages.
         $this->settings_API->add_subpages( $this->subpages )->register();
-        
-        // Creates the custom post type when WordPress is initialised.
-        add_action( 'init', array( $this, 'activate' ) );
+
+        // Store/Update the added cutom post types.
+        $this->store_custom_post_types();
+
+        if ( ! empty( $this->custom_post_types ) ) {
+            // Creates the custom post type(s) when WordPress is initialised.
+            add_action( 'init', array( $this, 'register_custom_post_types' ) );
+        }
+    }
+
+    /**
+     * Populates the multidimensional array of custom post types to be registered.
+     *
+     * @return void
+     */
+    public function store_custom_post_types() {
+        $this->custom_post_types = array(
+            array(
+                'post_type'     => 'lbd-product',
+                'name'          => 'Products',
+                'singular_name' => 'Product',
+                'public'        => true,
+                'has_archive'   => true
+            ),
+            array(
+                'post_type'     => 'lbd-comic',
+                'name'          => 'Comics',
+                'singular_name' => 'Comic',
+                'public'        => true,
+                'has_archive'   => true
+            )
+        );
     }
 
     /**
@@ -81,17 +117,19 @@ class Post_Type extends Controller {
      *
      * @return void
      */
-    public function activate() {
-        $args = array(
-            'labels'        => array(
-                'name'          => 'Products',
-                'singular_name' => 'Product'
-            ),
-            'public'        => true,
-            'has_archive'   => true
-        );
-        
-        register_post_type( 'lbd_cpt', $args );
+    public function register_custom_post_types() {
+        foreach ( $this->custom_post_types as $post_type ) {
+            $args = array(
+                'labels'        => array(
+                    'name'          => $post_type['name'],
+                    'singular_name' => $post_type['singular_name']
+                ),
+                'public'        => $post_type['public'],
+                'has_archive'   => $post_type['has_archive']
+            );
+
+            register_post_type( $post_type['post_type'], $args);
+        }
     }
 
     /**
