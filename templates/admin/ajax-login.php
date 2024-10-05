@@ -7,9 +7,16 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Templates
- * @version             0.1.0
+ * @version             0.2.0
  */
 
 ?>
 
-<h1>AJAX Login Manager</h1>
+<div class="pagewrap">
+    <!-- Screen Header Section -->
+    <div class="lbd-admin-header">
+        <!-- Screen Heading -->
+        <h1 class="screen-heading">AJAX Login Manager</h1>
+        <!-- /Screen Heading -->
+    </div>
+</div>
