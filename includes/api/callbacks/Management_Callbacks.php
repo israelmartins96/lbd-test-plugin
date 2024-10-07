@@ -42,7 +42,7 @@ class Management_Callbacks extends Controller {
     }
 
     /**
-     * Undocumented function
+     * Displays plugin settings dashboard description.
      *
      * @return void
      */
