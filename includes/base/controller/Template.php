@@ -14,6 +14,7 @@ namespace Includes\Base\Controller;
 use \Includes\Base\Controller\Controller;
 use \Includes\API\Settings_API;
 use \Includes\API\Callbacks\Admin_Callbacks;
+
 /**
  * Plugin Custom Template class.
  * 
@@ -25,6 +26,7 @@ use \Includes\API\Callbacks\Admin_Callbacks;
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
 class Template extends Controller {
+    
     /**
      * To store an instance of the Settings_API.
      *
@@ -94,4 +96,5 @@ class Template extends Controller {
         // Sequentially update the menu positions of the plugin's admin sub-pages.
         $this->set_subpages_positions( $this->subpages );
     }
+    
 }
