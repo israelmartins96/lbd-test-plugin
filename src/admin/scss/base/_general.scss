@@ -7,3 +7,7 @@ a {
 #wpcontent #wpbody #wpbody-content .pagewrap * {
     box-shadow: none !important;
 }
+
+.admin-settings-body {
+    padding: $admin_content_pad;
+}
