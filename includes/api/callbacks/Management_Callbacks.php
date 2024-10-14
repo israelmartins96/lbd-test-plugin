@@ -64,7 +64,7 @@ class Management_Callbacks extends Controller {
 
         $is_checked = isset( $option[ $section_id ] ) ? ( ( $option[ $section_id ] ? true : false ) ) : false;
         
-        $checkbox = '<input type="checkbox" id="' . $section_id . '" class="' . $checkbox_classes . '" name="' . $option_name . '[' . $section_id . ']' . '" value="1" placeholder="Type here..."' . ( $is_checked ? 'checked="checked"' : '' ) . ' />';
+        $checkbox = '<input type="checkbox" id="' . $section_id . '" class="' . $checkbox_classes . '" name="' . $option_name . '[' . $section_id . ']' . '" value="1"' . ( $is_checked ? 'checked="checked"' : '' ) . ' />';
 
         $checkbox_label = '<label for="' . $section_id . '" class="toggle-switch"></label>';
 
