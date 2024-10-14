@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.3
+ * @version             0.1.4
  */
 namespace Includes\API\Callbacks;
 
