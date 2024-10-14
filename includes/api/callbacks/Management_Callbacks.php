@@ -34,7 +34,7 @@ class Management_Callbacks extends Controller {
     public function lbd_checkbox_sanitise( $input ) {
         $output = array();
 
-        foreach ( $this->settings_sections as $section_id => $value ) {
+        foreach ( $this->settings_sections as $section_id => $option ) {
             $output[ $section_id ] = ( isset( $input[ $section_id ] ) ? true : false );
         }
         
@@ -60,9 +60,9 @@ class Management_Callbacks extends Controller {
         $checkbox_classes = 'toggle-checkbox';
         $section_id = $args[ 'label_for' ];
         $option_name = $args[ 'option_name' ];
-        $value = get_option( $option_name, $option_name );
+        $option = get_option( $option_name, $option_name );
 
-        $is_checked = isset( $value[ $section_id ] ) ? ( ( $value[ $section_id ] ? true : false ) ) : false;
+        $is_checked = isset( $option[ $section_id ] ) ? ( ( $option[ $section_id ] ? true : false ) ) : false;
         
         $checkbox = '<input type="checkbox" id="' . $section_id . '" class="' . $checkbox_classes . '" name="' . $option_name . '[' . $section_id . ']' . '" value="1" placeholder="Type here..."' . ( $is_checked ? 'checked="checked"' : '' ) . ' />';
 
