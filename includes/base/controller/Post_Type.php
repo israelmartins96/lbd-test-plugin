@@ -7,13 +7,15 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.2.0
  */
 namespace Includes\Base\Controller;
 
-use \Includes\Base\Controller\Controller;
 use \Includes\API\Settings_API;
+use \Includes\Base\Controller\Controller;
 use \Includes\API\Callbacks\Admin_Callbacks;
+use Includes\API\Callbacks\Post_Type_Callbacks;
+
 /**
  * Plugin Post Type Controller class.
  * 
@@ -25,6 +27,7 @@ use \Includes\API\Callbacks\Admin_Callbacks;
  * @author              Israel Martins <m.oisrael96@gmail.com>
  */
 class Post_Type extends Controller {
+
     /**
      * To store an instance of the Settings_API.
      *
@@ -38,6 +41,13 @@ class Post_Type extends Controller {
      * @var object
      */
     public $callbacks;
+
+    /**
+     * To store an instance of the Post_Type_Callbacks.
+     *
+     * @var object
+     */
+    public $callbacks_cpt;
 
     /**
      * To store the array of sub-pages of the custom post type.
@@ -73,10 +83,19 @@ class Post_Type extends Controller {
         // Instance of the plugin's Admin_Callbacks class.
         $this->callbacks = new Admin_Callbacks();
 
+        // Instance of the plugin's Post_Type_Callbacks class. 
+        $this->callbacks_cpt = new Post_Type_Callbacks();
+
         // Sets the sub-pages.
         $this->set_subpages();
 
-        // Adds the sub-pages.
+        $this->set_settings();
+
+        $this->set_settings_sections();
+        
+        $this->set_settings_fields();
+
+        // Adds the sub-page(s).
         $this->settings_API->add_subpages( $this->subpages )->register();
 
         // Store/Update the added cutom post types.
@@ -100,6 +119,7 @@ class Post_Type extends Controller {
                 'name'          => 'Products',
                 'singular_name' => 'Product',
                 'public'        => true,
+                'show_in_menu'  => true,
                 'has_archive'   => true
             ),
             array(
@@ -107,6 +127,7 @@ class Post_Type extends Controller {
                 'name'          => 'Comics',
                 'singular_name' => 'Comic',
                 'public'        => true,
+                'show_in_menu'  => true,
                 'has_archive'   => true
             )
         );
@@ -257,4 +278,110 @@ class Post_Type extends Controller {
         // Sequentially update the menu positions of the plugin's admin sub-pages.
         $this->set_subpages_positions( $this->subpages );
     }
+
+    /**
+     * Prepares the custom post types admin section settings parameters.
+     *
+     * @return void
+     */
+    public function set_settings() {
+        $args = array(
+            array(
+                'option_group'  => 'lbd_plugin_cpt_settings',
+                'option_name'   => 'lbd-custom-post-type',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_sanitise' )
+            )
+        );
+        
+        $this->settings_API->set_settings( $args );
+    }
+
+    /**
+     * Prepares the custom post types admin section settings sections.
+     *
+     * @return void
+     */
+    public function set_settings_sections() {
+        $args = array(
+            array(
+                'id'            => 'lbd-cpt-index',
+                'title'         => 'Custom Post Type Manager',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_section' ),
+                'page'          => 'lbd-custom-post-type'
+            )
+        );
+
+        $this->settings_API->set_settings_sections( $args );
+    }
+
+    /**
+     * Prepares the custom post types admin section settings fields.
+     *
+     * @return void
+     */
+    public function set_settings_fields() {
+        // Post type fields.
+        $args = array(
+            array(
+                'id'            => 'post-type-id',
+                'title'         => 'Post Type ID',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_text_field' ),
+                'page'          => 'lbd-custom-post-type',
+                'section'       => 'lbd-cpt-index',
+                'args'          => array(
+                    'option_name'   => 'lbd-custom-post-type',
+                    'label_for'     => 'post-type-id',
+                    'placeholder'   => 'e.g., custom-post-type'
+                )
+            ),
+            array(
+                'id'            => 'singular-name',
+                'title'         => 'Singular Name',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_text_field' ),
+                'page'          => 'lbd-custom-post-type',
+                'section'       => 'lbd-cpt-index',
+                'args'          => array(
+                    'option_name'   => 'lbd-custom-post-type',
+                    'label_for'     => 'singular-name',
+                    'placeholder'   => 'e.g., Post'
+                )
+            ),
+            array(
+                'id'            => 'plural-name',
+                'title'         => 'Plural Name',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_text_field' ),
+                'page'          => 'lbd-custom-post-type',
+                'section'       => 'lbd-cpt-index',
+                'args'          => array(
+                    'option_name'   => 'lbd-custom-post-type',
+                    'label_for'     => 'plural-name',
+                    'placeholder'   => 'e.g., Posts'
+                )
+            ),
+            array(
+                'id'            => 'public',
+                'title'         => 'Public?',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_checkbox_field' ),
+                'page'          => 'lbd-custom-post-type',
+                'section'       => 'lbd-cpt-index',
+                'args'          => array(
+                    'option_name'   => 'lbd-custom-post-type',
+                    'label_for'     => 'public'
+                )
+            ),array(
+                'id'            => 'has-archive',
+                'title'         => 'Has Archive?',
+                'callback'      => array( $this->callbacks_cpt, 'cpt_checkbox_field' ),
+                'page'          => 'lbd-custom-post-type',
+                'section'       => 'lbd-cpt-index',
+                'args'          => array(
+                    'option_name'   => 'lbd-custom-post-type',
+                    'label_for'     => 'has-archive'
+                )
+            )
+        );
+
+        $this->settings_API->set_settings_fields( $args );
+    }
+
 }

@@ -19,4 +19,24 @@
         <h1 class="screen-heading">Custom Post Types Manager</h1>
         <!-- /Screen Heading -->
     </div>
+    <!-- /Screen Header Section -->
+    
+    <!-- Settings Options Area -->
+    <div class="admin-settings-body">
+        <?php
+            // Settings Feedback
+            settings_errors();
+        ?>
+
+        <!-- Settings Fields -->
+        <form method="post" action="options.php">
+            <?php
+                settings_fields( 'lbd_plugin_cpt_settings' );
+                do_settings_sections( 'lbd-custom-post-type' );
+                submit_button();
+            ?>
+        </form>
+        <!-- /Settings Fields -->
+    </div>
+    <!-- /Settings Options Area -->
 </div>
