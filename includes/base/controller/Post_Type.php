@@ -108,21 +108,23 @@ class Post_Type extends Controller {
     }
 
     /**
-     * Populates the multidimensional array of custom post types to be registered.
+     * Populates the custom post types to be registered.
      *
      * @return void
      */
     public function store_custom_post_types() {
         $options = get_option( 'lbd-custom-post-type' );
 
-        $this->custom_post_types[] = array(
-            'post_type'         => $options['post-type-id'],
-            'name'              => $options['plural-name'],
-            'singular_name'     => $options['singular-name'],
-            'public'            => $options['public'],
-            'show_in_menu'      => true,
-            'has_archive'       => isset( $options['has-archive'] ) ? $options['has-archive'] : false
-        );
+        foreach ( $options as $option ) {
+            $this->custom_post_types[] = array(
+                'post_type'         => $option['post-type-id'],
+                'name'              => $option['plural-name'],
+                'singular_name'     => $option['singular-name'],
+                'public'            => $option['public'],
+                'show_in_menu'      => true,
+                'has_archive'       => isset( $option['has-archive'] ) ? $option['has-archive'] : false
+            );
+        }
     }
 
     /**

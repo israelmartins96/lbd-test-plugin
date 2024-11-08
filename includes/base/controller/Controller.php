@@ -126,6 +126,12 @@ class Controller {
         }
     }
 
+    /**
+     * Checks the enabled state of a settings section.
+     *
+     * @param string $section_id
+     * @return boolean
+     */
     public function is_settings_section_activated( $section_id ) {
         $option = get_option( 'lbd-plugin', 'lbd-plugin' );
         $section = $option[ $section_id ];

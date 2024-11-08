@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.0
+ * @version             0.1.1
  */
 namespace Includes\API\Callbacks;
 
@@ -33,13 +33,25 @@ class Post_Type_Callbacks {
     }
 
     /**
-     * Undocumented function
+     * Sanitises the custom post type input from the WP Admin dashboard form.
      *
-     * @param [type] $input
+     * @param array $input
      * @return void
      */
     public function cpt_sanitise( $input ) {
-        return $input;
+        $output = get_option( 'lbd-custom-post-type' );
+
+        // Add a new custom post type if a post type with the ID does not exist.
+        // Otherwise, update the post type if a post type with the same ID exists.
+        foreach ( $output as $post_type => $properties ) {
+            if ( $input['post-type-id'] === $post_type ) {
+                $output[ $post_type ] = $input;
+            } else {
+                $output[ $input['post-type-id'] ] = $input;
+            }
+        }
+        
+        return $output;
     }
 
     /**
@@ -50,15 +62,13 @@ class Post_Type_Callbacks {
      */
     public function cpt_text_field( $args ) {
         $option_name = $args[ 'option_name' ];
-        $option = get_option( $option_name, $option_name );
         $placeholder = $args[ 'placeholder' ];
         $section_id = $args[ 'label_for' ];
         $text_field_classes = 'regular-text text-field';
 
         $name = $option_name . '[' . $section_id . ']';
-        $section = isset( $option[ $section_id ] ) ? $option[ $section_id ] : '';
         
-        $text_field = '<input type="text" id="' . $section_id . '" class="' . $text_field_classes . '" name="' . $name . '" value="' . $section . '" placeholder="' . $placeholder . '" />';
+        $text_field = '<input type="text" id="' . $section_id . '" class="' . $text_field_classes . '" name="' . $name . '" value="" placeholder="' . $placeholder . '" />';
 
         $text_field_label = '<label for="' . $section_id . '" ></label>';
 
@@ -74,13 +84,11 @@ class Post_Type_Callbacks {
     public function cpt_checkbox_field( $args ) {
         $checkbox_classes = 'toggle-checkbox';
         $option_name = $args[ 'option_name' ];
-        $option = get_option( $option_name, $option_name );
         $section_id = $args[ 'label_for' ];
 
-        $is_checked = isset( $option[ $section_id ] ) ? ( ( $option[ $section_id ] ? true : false ) ) : false;
         $name = $option_name . '[' . $section_id . ']';
         
-        $checkbox = '<input type="checkbox" id="' . $section_id . '" class="' . $checkbox_classes . '" name="' . $name . '" value="1"' . ( $is_checked ? 'checked="checked"' : '' ) . ' />';
+        $checkbox = '<input type="checkbox" id="' . $section_id . '" class="' . $checkbox_classes . '" name="' . $name . '" value="1" />';
 
         $checkbox_label = '<label for="' . $section_id . '" class="toggle-switch"></label>';
 
