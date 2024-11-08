@@ -14,7 +14,7 @@
     padding: 0.125rem;
     border-radius: $admin_toggle_switch-border_radius;
     @include admin_toggle_switch-bg( off );
-    height: 1.25rem;
+    height: 1rem;
     width: 2rem;
 
         /** Toggle Switch Knob **/
@@ -26,8 +26,8 @@
             background: #fefefe;
             border: $admin_toggle_switch_knob-border;
             border-radius: $admin_toggle_switch-border_radius;
-            height: 1.25rem;
-            width: 1.25rem;
+            height: 1rem;
+            width: 1rem;
             transform: translateY( -50% );
         }
     }
