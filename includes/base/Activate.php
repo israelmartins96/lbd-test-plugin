@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Classes
- * @version             0.1.1
+ * @version             0.2.0
  */
 namespace Includes\Base;
 
@@ -31,14 +31,43 @@ class Activate {
     public static function activate() {        
         flush_rewrite_rules();
         
-        $lbd_option = 'lbd-plugin';
-        $lbd_option_value = array();
+        self::preset_lbd_values();
+    }
+
+    /**
+     * Sets plugin options.
+     *
+     * @since       0.3.2
+     */
+    public static function preset_lbd_values() {
+        $preset_cpt_value = array(
+            'example' => array(
+                            'post-type-id'         => 'example',
+                            'plural-name'              => 'Examples',
+                            'singular-name'     => 'Example',
+                            'public'            => false,
+                            'has-archive'       => false
+                        )
+        );
         
-        if ( get_option( $lbd_option ) ) {
+        self::preset_lbd_option( 'lbd-plugin', array() );
+        self::preset_lbd_option( 'lbd-custom-post-type', $preset_cpt_value );
+    }
+
+    /**
+     * Checks and updates/creates a plugin option if the option does not exist.
+     * 
+     * @param string $option
+     * @param mixed $value
+     * 
+     * @since       0.3.2
+     */
+    public static function preset_lbd_option( $option, $value ) {
+        if ( get_option( $option ) ) {
             return;
         }
 
-        update_option($lbd_option, $lbd_option_value, null);
+        update_option($option, $value, null);
     }
 
 }

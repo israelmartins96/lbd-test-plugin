@@ -133,7 +133,11 @@ class Controller {
      * @return boolean
      */
     public function is_settings_section_activated( $section_id ) {
-        $option = get_option( 'lbd-plugin', 'lbd-plugin' );
+        if ( ! get_option( 'lbd-plugin' ) ) {
+            return false;
+        }
+        
+        $option = get_option( 'lbd-plugin' );
         $section = $option[ $section_id ];
         
         $is_section_activated = isset( $section ) ? $section : false;
