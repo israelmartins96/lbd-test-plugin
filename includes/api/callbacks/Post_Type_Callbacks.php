@@ -36,7 +36,7 @@ class Post_Type_Callbacks {
      * Sanitises the custom post type input from the WP Admin dashboard form.
      *
      * @param array $input
-     * @return void
+     * @return $output
      */
     public function cpt_sanitise( $input ) {
         $output = get_option( 'lbd-custom-post-type' );
