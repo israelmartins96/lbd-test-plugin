@@ -15,3 +15,14 @@
 @mixin admin_toggle_switch-bg( $state: on ) {
     background: map-get( $admin_toggle_switch-bg, $state );
 }
+
+/** Table **/
+@mixin admin_table-grid-cols( $cols: 1, $width: 1fr ) {
+    display: grid;
+    grid-template-columns: repeat($cols, $width);
+}
+
+@mixin admin_table_item() {
+    margin-bottom: 0 !important;
+    width: fit-content;
+}

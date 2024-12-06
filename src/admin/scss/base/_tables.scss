@@ -1,0 +1,48 @@
+/** Table **/
+.table-container {
+    background: $admin_table-bg;
+    border: $admin_table-border;
+    font-size: $admin_table-font-size;
+
+    /** Table Header **/
+    .table-header {
+        /** Table Header Row **/
+        .row {
+            @include admin_table-grid-cols( 5 );
+            padding: $admin_table_row-pad;
+            margin: $admin_table_row-margin;
+            border-bottom: $admin_table-border;
+            font-size: $admin_table_header-font-size;
+
+            /** Table Header Row Item **/
+            .item {
+                @include admin_table_item();
+            }
+        }
+    }
+
+    /** Table Body Row Item **/
+    .table-body {
+        /** Table Body Row **/
+        .row {
+            @include admin_table-grid-cols( 5 );
+            padding: $admin_table_row-pad;
+            margin: $admin_table_row-margin;
+            
+            &:nth-child(odd) {
+                background: $admin_table_row_odd-bg;
+            }
+
+            /** Table Body Row Item **/
+            .item {
+                @include admin_table_item();
+
+                a {
+                    &:last-child {
+                        color: $admin_text_danger-colour;
+                    }
+                }
+            }
+        }
+    }
+}

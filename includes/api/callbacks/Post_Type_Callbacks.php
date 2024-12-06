@@ -29,7 +29,7 @@ class Post_Type_Callbacks {
      * @return void
      */
     public function cpt_section() {
-        echo 'Manage the custom post types of the plugin.';
+        echo 'Add a new custom post type.';
     }
 
     /**

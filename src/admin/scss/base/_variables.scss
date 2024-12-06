@@ -1,6 +1,9 @@
+/** General **/
+$admin_text_danger-colour: #b32d2e;
+
 /** Screen Heading **/
-$admin_header-bg: #fefefe;
 $admin_header-pad: 1rem 2rem 0.25rem 0;
+$admin_header-bg: #fefefe;
 $admin_screen_heading-pad: 0.5rem 0 0.5rem 2rem;
 $admin_screen_heading-margin: 0 0 1.5rem;
 
@@ -11,3 +14,12 @@ $admin_content-pad: 1rem 2rem 0;
 /** Toggle Switch **/
 $admin_toggle_switch-border_radius: 1rem;
 $admin_toggle_switch_knob-border: 1px solid #aaa;
+
+/** Table **/
+$admin_table-border: 0.5px solid #c3c4c7;
+$admin_table-bg: #fefefe;
+$admin_table-font-size: 0.875rem;
+$admin_table_header-font-size: 0.875rem;
+$admin_table_row-pad: 0.5rem 0.75rem;
+$admin_table_row-margin: 0;
+$admin_table_row_odd-bg: #f6f7f7;

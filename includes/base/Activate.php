@@ -40,10 +40,11 @@ class Activate {
      * @since       0.3.2
      */
     public static function preset_lbd_values() {
+        // Default/Example custom post type of the plugin. Stored on initial activation.
         $preset_cpt_value = array(
             'example' => array(
-                            'post-type-id'         => 'example',
-                            'plural-name'              => 'Examples',
+                            'post-type-id'      => 'example',
+                            'plural-name'       => 'Examples',
                             'singular-name'     => 'Example',
                             'public'            => false,
                             'has-archive'       => false
