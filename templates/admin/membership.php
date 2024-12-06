@@ -19,4 +19,11 @@
         <h1 class="screen-heading">Membership Manager</h1>
         <!-- /Screen Heading -->
     </div>
+    <!-- /Screen Header Section -->
+    
+    <!-- Tab Content -->
+    <div class="tab-content">
+        <p><em>Coming Soon!</em></p>
+    </div>
+    <!-- /Tab Content -->
 </div>
