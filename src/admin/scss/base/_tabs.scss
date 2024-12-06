@@ -17,6 +17,7 @@
         &:not(.active):focus,
         &:not(.active):active {
             @include admin_tab-bg( hover );
+            text-decoration: none;
         }
 
         &.active {
