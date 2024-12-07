@@ -33,6 +33,10 @@
                 background: $admin_table_row_odd-bg;
             }
 
+            &:hover {
+                background: #ccc;
+            }
+
             /** Table Body Row Item **/
             .item {
                 @include admin_table_item();

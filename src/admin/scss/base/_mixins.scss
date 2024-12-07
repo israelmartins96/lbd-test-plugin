@@ -25,4 +25,5 @@
 @mixin admin_table_item() {
     margin-bottom: 0 !important;
     width: fit-content;
+    cursor: default;
 }
