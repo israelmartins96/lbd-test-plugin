@@ -120,7 +120,7 @@ class Post_Type extends Controller {
                 'post_type'         => $option['post-type-id'],
                 'name'              => $option['plural-name'],
                 'singular_name'     => $option['singular-name'],
-                'public'            => $option['public'],
+                'public'            => isset( $option['public'] ) ? $option['public'] : false,
                 'show_in_menu'      => true,
                 'has_archive'       => isset( $option['has-archive'] ) ? $option['has-archive'] : false
             );

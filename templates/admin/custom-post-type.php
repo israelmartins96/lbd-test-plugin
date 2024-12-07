@@ -7,7 +7,7 @@
  *
  * @package             LBD_Test_Plugin
  * @subpackage          LBD_Test_Plugin/Templates
- * @version             0.3.0
+ * @version             0.3.1
  */
 
 ?>
@@ -65,8 +65,8 @@
                                 <li class="item"><?php echo $props['post-type-id']; ?></li>
                                 <li class="item"><?php echo $props['singular-name']; ?></li>
                                 <li class="item"><?php echo $props['plural-name']; ?></li>
-                                <li class="item"><?php echo $props['public'] ? 'Yes' : 'No'; ?></li>
-                                <li class="item"><?php echo $props['has-archive'] ? 'Yes' : 'No'; ?></li>
+                                <li class="item"><?php echo isset( $props['public'] ) ? ( $props['public'] ? 'Yes' : 'No' ) : '-'; ?></li>
+                                <li class="item"><?php echo isset( $props['has-archive'] ) ? ( $props['has-archive'] ? 'Yes' : 'No' ) : '-'; ?></li>
                             </ul>
                             <?php
                             endforeach;
