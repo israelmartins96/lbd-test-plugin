@@ -68,7 +68,7 @@ class Post_Type_Callbacks {
 
         $name = $option_name . '[' . $section_id . ']';
         
-        $text_field = '<input type="text" id="' . $section_id . '" class="' . $text_field_classes . '" name="' . $name . '" value="" placeholder="' . $placeholder . '" />';
+        $text_field = '<input type="text" id="' . $section_id . '" class="' . $text_field_classes . '" name="' . $name . '" value="" placeholder="' . $placeholder . '" required="required"/>';
 
         $text_field_label = '<label for="' . $section_id . '" ></label>';
 
